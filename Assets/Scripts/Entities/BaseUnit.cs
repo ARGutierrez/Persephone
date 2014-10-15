@@ -11,6 +11,9 @@ public abstract class BaseUnit : MonoBehaviour
 	public GameObject player;
     public EntityState state;
     #endregion
+
+	int maxHealth;
+	int curHealth;
     protected int MaxHealth {   get { return maxHealth; } 
                                 set { maxHealth = value;} }
     protected int CurHealth {   get { return curHealth; }
