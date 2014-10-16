@@ -8,7 +8,10 @@ public class Player : BaseUnit
     private readonly float BASE_SPEED = 10f;
     #endregion
 
+	MyInput input;
+
     void Start () {
+		input = Reference.input;
         moveSpeed = BASE_SPEED;
 		health = BASE_HEALTH;
 	}
@@ -35,8 +38,8 @@ public class Player : BaseUnit
     protected override void Move()
     {
 		state = EntityState.MOVING;
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        float h = input.GetAxis("Horizontal");
+        float v = input.GetAxis("Vertical");
         Vector3 translate = new Vector3(h, v, 0);
         translate = translate.normalized;
 
