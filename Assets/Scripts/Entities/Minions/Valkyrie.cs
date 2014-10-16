@@ -6,80 +6,111 @@ public class Valkyrie : BaseUnit {
 	// Use this for initialization
 	void Start () {
 		state = EntityState.IDLE;
-		player = GameObject.Find("Player");
+		//Finds player GameObject, sets BaseUnit player to that Object
+		GameObject playerObj = GameObject.Find("Player");
+		if (playerObj != null)
+		{
+			player = playerObj.GetComponent<BaseUnit>();
+		}
 		//set health and moveSpeed
 		health = 20; //placeholder value
 		moveSpeed = 15f; // faster than player base speed
-
+		
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		Move();
 		//code for death
-		if(health <= 0)
-		{
-			Die();
+		if (health <= 0) {
+			Die ();
 		}
-		
-		//finds all objects with tag Enemy and assigns them to a group
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		float aggroRange = 21f;//Valkyrie will try to attack enemies at 20 feet
-		//iterates through array of enemies
-		float closestEnemyDist = 21; //max distance of Valkyrie is 20 feet
-		float currentEnemyDist = 21;//tracks the distance of target object 
-		GameObject closestEnemyObj = null;//tracks closest enemy object
-		foreach(GameObject target in enemies) 
-		{
-			currentEnemyDist = Vector3.Distance(target.transform.position, transform.position);
-			if (currentEnemyDist < closestEnemyDist)
-			{
-				closestEnemyDist = currentEnemyDist;
-				closestEnemyObj = target;
+		BaseUnit target = FindTarget ();//finds the closest enemy target
+		//gives distance Valkyrie is from persephone
+		float distFromPlayer = Vector3.Distance (player.transform.position, transform.position);
+		//the distance that persephone can be from Valkyrie before he moves to follow
+		float followDistance = 4f;
+		float attackRange = 10f; 
+		if (state == EntityState.IDLE) {
+			
+			// play idle animation
+			
+			//checks if target is not null
+			if (target) {
+				state = EntityState.ATTACKING;
+			} else if (distFromPlayer > followDistance) {
+				state = EntityState.MOVING;
+			}
+		}
+		if (state == EntityState.MOVING) {
+			//move to persephone
+			Move (player);	
+			//checks if target is not null
+			if (target) {
+				state = EntityState.ATTACKING;
+			} else if (distFromPlayer <= followDistance) {
+				state = EntityState.IDLE;
+			}
+		}
+		if (state == EntityState.ATTACKING) {
+			float distFromTarget= Vector3.Distance (target.transform.position, transform.position);;
+			if (distFromTarget <= attackRange) {
+				Attack (target);
+			} else {
+				Move (target);
+			}
+			
+			if (target.health <= 0) {
+				target = FindTarget ();//finds the closest enemy target
+				if (target) {
+					state = EntityState.ATTACKING;
+				} else {
+					state = EntityState.MOVING;
+					Move (player);
+				}
 			}
 			
 		}
-		//checks if closest enemy is within range, if so attack
-		if (closestEnemyDist < aggroRange && state != EntityState.ATTACKING) 
-		{
-			Attack(closestEnemyObj, closestEnemyDist);
-		}
-		
-		
-		
 	}
-	
-	protected override void Move()
+	// this method checks the enemy's surroundings and finds the closest minion
+	protected BaseUnit FindTarget()
 	{
-		//gives distance Valkyrie is from persephone
-		float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-		//the distance that persephone can be from skeleton before he moves to follow
-		float followDistance = 4f;
-		if (distFromPlayer >= followDistance && state == EntityState.IDLE)
+		//finds all objects with tag Enemy and assigns them to a group
+		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
+		
+		//iterates through array of enemies
+		float closestMinionDist = 21; //max distance of Valkyrie is 20 feet
+		float currentMinionDist = 21;//tracks the distance of target object 
+		GameObject closestMinionObj = null;//tracks closest enemy object
+		BaseUnit chosenTarget = null;
+		foreach(GameObject targetMin in minions)
 		{
-			state = EntityState.MOVING;
-			//follow player
+			currentMinionDist = Vector3.Distance(targetMin.transform.position, transform.position);
+			if (currentMinionDist < closestMinionDist)
+			{
+				closestMinionDist = currentMinionDist;
+				closestMinionObj = targetMin;
+			}
 			
-			transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed*Time.deltaTime );
 		}
-		else if(distFromPlayer > followDistance && (state != EntityState.ATTACKING || state != EntityState.DYING))
+		if (closestMinionObj != null)
 		{
-			state = EntityState.IDLE;
+			chosenTarget = closestMinionObj.GetComponent<BaseUnit>();
 		}
+		
+		return chosenTarget;
+		
+	}
+	protected override void Move(BaseUnit targetUnit)
+	{
+		transform.position = Vector3.MoveTowards (transform.position, targetUnit.transform.position, moveSpeed * Time.deltaTime);
 	}
 	
-	protected override void Attack(GameObject enemy, float enemyDist)
+	protected override void Attack(BaseUnit enemy)
 	{
-		state = EntityState.ATTACKING;
-		float attackRange = 10f; //attack range for valkyrie
-		while(enemyDist > attackRange)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, moveSpeed*Time.deltaTime);
-		}
+		//do Attack animation
 		//code for damage dealt and received goes here
-		
 		
 		
 		
@@ -87,7 +118,7 @@ public class Valkyrie : BaseUnit {
 	protected override void Die()
 	{
 		state = EntityState.DYING;
-		//Destroy (Valkyrie);
+		Destroy (this.gameObject);
 		//add code to give will back to persephone
 		
 	}

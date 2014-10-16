@@ -20,7 +20,8 @@ public class Player : BaseUnit
 	//convert it to seconds because of Time.deltaTime
 	void Update () 
     {
-        Move();
+		//passes an empty value for the move function, player does not move towards a unit
+        Move(null);
 		//code for minion summoning
 		//checks if 1 is down on alpha numbers or on numpad
 		/*if (Input.GetKeyDown(KeyCode.Alpha1)||Input.GetKeyDown(KeyCode.Keypad7))
@@ -34,8 +35,8 @@ public class Player : BaseUnit
 			}
 		}*/
 	}
-
-    protected override void Move()
+	//players move command is passed an empty variable to avoid an error
+    protected override void Move(BaseUnit none)
     {
 		state = EntityState.MOVING;
         float h = input.GetAxis("Horizontal");
@@ -46,7 +47,7 @@ public class Player : BaseUnit
         transform.Translate(translate * moveSpeed * Time.deltaTime);
     }
 
-    protected override void Attack(GameObject target, float distanceToTarget)
+    protected override void Attack(BaseUnit target)
     {
 		state = EntityState.ATTACKING;
     }
