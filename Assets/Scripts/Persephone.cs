@@ -31,6 +31,10 @@ public class Persephone : BaseUnit {
 		return CurWill;
 	}
 
+	public void setInventorySize(int i) {
+		INVENTORY_SIZE = i;
+	}
+
 	/*TODO
 	*Accessor method for the summons list
 	*NOTE: not certain what parameter should be...	*/
