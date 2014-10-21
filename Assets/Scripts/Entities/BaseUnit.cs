@@ -12,7 +12,7 @@ public abstract class BaseUnit : MonoBehaviour
     public Sprite sprite;
     public float health;
     public float moveSpeed;
-	public GameObject player;
+	public BaseUnit player;
     public EntityState state;
     #endregion
 
@@ -51,9 +51,10 @@ public abstract class BaseUnit : MonoBehaviour
 	}
 
 	#region Unit Methods
-	protected abstract void Move();
+	//move method now moves unit toward a particular unit
+	protected abstract void Move(BaseUnit target);
 //	TODO protected abstract void Move(int direction, float speed);
-	protected abstract void Attack(GameObject target, float distanceToTarget);
+	protected abstract void Attack(BaseUnit target);
 	protected abstract void Die();
 /*	protected abstract void Die(){
 		Character.SetActive (false);
