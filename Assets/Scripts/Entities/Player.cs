@@ -11,6 +11,7 @@ public class Player : BaseUnit
 	MyInput input;
 
     void Start () {
+		gameObject.GetComponent<SpriteRenderer>().sprite = sprite; 
 		input = Reference.input;
         moveSpeed = BASE_SPEED;
 		health = BASE_HEALTH;
