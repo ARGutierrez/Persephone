@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class Skeleton : BaseUnit
 {
@@ -10,6 +11,12 @@ public class Skeleton : BaseUnit
     float followDistance;
     float attackRange;
     #endregion
+
+    Seeker seeker;
+    Path path;
+
+    int currentWP = 0;
+    public float nextWaypointDistance = 3;
 
     // Use this for initialization
     void Start()
@@ -28,6 +35,10 @@ public class Skeleton : BaseUnit
 
         attackRange = 4f;
 
+        BaseUnit target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();//FindTarget();//finds the closest enemy target
+        seeker = GetComponent<Seeker>();
+        path = seeker.StartPath(this.transform.position, target.transform.position);
+
     }
 
    /// <summary>
@@ -40,9 +51,12 @@ public class Skeleton : BaseUnit
         {
             Die();
         }
-        
-        BaseUnit target = FindTarget();//finds the closest enemy target
+
+        BaseUnit target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();//FindTarget();//finds the closest enemy target
         distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if(path == null)
+            path = seeker.StartPath(this.transform.position, target.transform.position);
+
         //the distance that persephone can be from skeleton before he moves to follow
         #region IdleState
         if (state == EntityState.IDLE)
@@ -65,7 +79,7 @@ public class Skeleton : BaseUnit
         else if (state == EntityState.MOVING)
         {
             //move to persephone
-            Move(player);
+            Move(target, path);
             //checks if target is not null
             if (target != null)
             {
@@ -88,7 +102,7 @@ public class Skeleton : BaseUnit
             }
             else
             {
-                Move(target);
+                Move(target, path);
             }
 
             if (target.health <= 0)
@@ -141,9 +155,26 @@ public class Skeleton : BaseUnit
 
     }
 
-    protected override void Move(BaseUnit targetUnit)
+    protected override void Move(BaseUnit target)
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetUnit.transform.position, moveSpeed * Time.deltaTime);
+        throw new System.NotImplementedException();
+    }
+    // TODO: MAKE THIS THING MOVE
+    protected void Move(BaseUnit targetUnit, Path path)
+    {
+        //transform.position = Vector3.MoveTowards(transform.position, targetUnit.transform.position, moveSpeed * Time.deltaTime);
+        //Direction to the next waypoint
+        // Vector3 dir = (path.vectorPath[currentWP] - transform.position).normalized;
+        // dir *= 5f * Time.fixedDeltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, path.vectorPath[currentWP], moveSpeed * Time.deltaTime);
+
+        //Check if we are close enough to the next waypoint
+        //If we are, proceed to follow the next waypoint
+        if (Vector3.Distance(transform.position, path.vectorPath[currentWP]) < nextWaypointDistance)
+        {
+            currentWP++;
+            return;
+        }
     }
 
     protected override void Attack(BaseUnit enemy)
