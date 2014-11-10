@@ -16,7 +16,7 @@ public class GenericEnemy : BaseUnit
 		}
 
 		//set health and moveSpeed
-		health = 30; //placeholder value
+		curHealth = 30; //placeholder value
 		moveSpeed = 15f; // higher than player base speed so you can't run
 
 		
@@ -26,7 +26,7 @@ public class GenericEnemy : BaseUnit
 	void Update () 
 	{
 		//code for death
-		if (health <= 0) {
+		if (curHealth <= 0) {
 			Die ();
 		}
 		BaseUnit target = FindTarget ();//finds the closest enemy target
@@ -63,7 +63,7 @@ public class GenericEnemy : BaseUnit
 				Move (target);
 			}
 			
-			if (target.health <= 0) {
+			if (target.CurHealth <= 0) {
 				target = FindTarget ();//finds the closest enemy target
 
 				if (distFromPlayer <= aggroRange) 

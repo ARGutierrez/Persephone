@@ -13,7 +13,7 @@ public class PhantomWarrior : BaseUnit {
 			player = playerObj.GetComponent<BaseUnit>();
 		}
 		//set health and moveSpeed
-		health = 30; //placeholder value
+		CurHealth = 30; //placeholder value
 		moveSpeed = 15f; // faster than player base speed
 		
 		
@@ -22,7 +22,7 @@ public class PhantomWarrior : BaseUnit {
 	// Update is called once per frame
 	void Update () {
 		
-		if (health <= 0) {
+		if (CurHealth <= 0) {
 			Die ();
 		}
 		BaseUnit target = FindTarget ();//finds the closest enemy target
@@ -61,7 +61,7 @@ public class PhantomWarrior : BaseUnit {
 				Move (target);
 			}
 			
-			if (target.health <= 0) {
+			if (target.CurHealth <= 0) {
 				target = FindTarget ();//finds the closest enemy target
 				if (target) {
 					state = EntityState.ATTACKING;

@@ -9,8 +9,16 @@ public class Skeleton : BaseUnit
     float distFromPlayer;
     //the distance that persephone can be from skeleton before he moves to follow
     float followDistance;
-    float attackRange;
     #endregion
+
+	#region Skeleton Base Stats
+	private readonly int BASE_HEALTH = 60;
+	private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
+	private readonly int WILL_COST = 3; 
+	private readonly int DAMAGE_PER_ATTACK = 10;
+	private readonly float ATTACK_RANGE = 4f;
+	#endregion
+
 
     Seeker seeker;
     Path path;
@@ -28,12 +36,13 @@ public class Skeleton : BaseUnit
         {
             player = playerObj.GetComponent<BaseUnit>();
         }
-        //set health and moveSpeed
-        health = 30; //placeholder value
-        moveSpeed = 15f; // higher than player base speed
+        //set CurHealth and moveSpeed
+		MaxHealth = BASE_HEALTH;
+        CurHealth = BASE_HEALTH; //placeholder value
+        moveSpeed = BASE_SPEED; // higher than player base speed
         followDistance = 4f;//gives distance skeleton is from persephone
 
-        attackRange = 4f;
+        
 
         BaseUnit target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();//FindTarget();//finds the closest enemy target
         seeker = GetComponent<Seeker>();
@@ -47,14 +56,14 @@ public class Skeleton : BaseUnit
     void Update()
     {
         //code for death
-        if (health <= 0)
+        if (CurHealth <= 0)
         {
             Die();
         }
 
-        BaseUnit target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();//FindTarget();//finds the closest enemy target
+        BaseUnit target = FindTarget();//finds the closest enemy target
         distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if(path == null)
+        if(path == null && target != null)
             path = seeker.StartPath(this.transform.position, target.transform.position);
 
         //the distance that persephone can be from skeleton before he moves to follow
@@ -79,7 +88,7 @@ public class Skeleton : BaseUnit
         else if (state == EntityState.MOVING)
         {
             //move to persephone
-            Move(target, path);
+			Move(target, path);
             //checks if target is not null
             if (target != null)
             {
@@ -95,30 +104,33 @@ public class Skeleton : BaseUnit
         #region AttackingState
         else if (state == EntityState.ATTACKING)
         {
-            float distFromTarget = Vector3.Distance(target.transform.position, transform.position); ;
-            if (distFromTarget <= attackRange)
-            {
-                Attack(target);
-            }
-            else
-            {
-                Move(target, path);
-            }
-
-            if (target.health <= 0)
-            {//healthOfTarget <= 0
-                target = FindTarget();//finds the closest enemy target
-                if (target != null)
-                {
-                    state = EntityState.ATTACKING;
-                }
-                else
-                {
-                    state = EntityState.MOVING;
-                    Move(player);
-                }
-            }
-        }
+			if(target != null){
+				float distFromTarget = Vector3.Distance(target.transform.position, transform.position); ;
+            	if (distFromTarget <= ATTACK_RANGE)
+            	{
+               		Attack(target);
+					if (target.CurHealth <= 0)
+					{//CurHealthOfTarget <= 0
+						target = FindTarget();//finds the closest enemy target
+						if (target != null)
+						{
+							state = EntityState.ATTACKING;
+						}
+						else
+						{
+							state = EntityState.MOVING;
+							Move(player);
+						}
+					}
+            	}
+            	else
+            	{
+               		Move(target, path);
+            	}
+        	}
+			else
+				state = EntityState.IDLE;
+		}
         #endregion
     }
     
@@ -129,7 +141,7 @@ public class Skeleton : BaseUnit
     protected BaseUnit FindTarget()
     {
         //finds all objects with tag Enemy and assigns them to a group
-        GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
+		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
 
         //iterates through array of enemies
         float closestMinionDist = 21; //max distance of skeleton is 20 feet
@@ -181,8 +193,7 @@ public class Skeleton : BaseUnit
     {
         //do Attack animation
         //code for damage dealt and received goes here
-
-
+		enemy.CurHealth = enemy.CurHealth - DAMAGE_PER_ATTACK;
 
 
     }
@@ -192,7 +203,7 @@ public class Skeleton : BaseUnit
         state = EntityState.DYING;
         Destroy(this.gameObject);
         //add code to give will back to persephone
-
+		((Player)player).CurWill += WILL_COST;
     }
 }
 
