@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : BaseUnit
 {
     #region Persephone Base Stats
-    private readonly float BASE_HEALTH = 10f;
+    private readonly float BASE_HEALTH = 100f;
     private readonly float BASE_SPEED = 10f;
     #endregion
 
@@ -13,6 +13,7 @@ public class Player : BaseUnit
     void Start () {
 		gameObject.GetComponent<SpriteRenderer>().sprite = sprite; 
 		input = Reference.input;
+		Reference.player = this;
         moveSpeed = BASE_SPEED;
 		health = BASE_HEALTH;
 	}
@@ -39,13 +40,17 @@ public class Player : BaseUnit
 	//players move command is passed an empty variable to avoid an error
     protected override void Move(BaseUnit none)
     {
-		state = EntityState.MOVING;
-        float h = input.GetAxis("Horizontal");
-        float v = input.GetAxis("Vertical");
-        Vector3 translate = new Vector3(h, v, 0);
-        translate = translate.normalized;
+		float h = input.GetAxis("Horizontal");
+		float v = input.GetAxis("Vertical");
 
-        transform.Translate(translate * moveSpeed * Time.deltaTime);
+		if (h == 0 && v == 0) {
+			state = EntityState.IDLE;
+		} else {
+			state = EntityState.MOVING;
+			Vector3 translate = new Vector3(h, v, 0);
+			translate = translate.normalized;
+			transform.Translate(translate * moveSpeed * Time.deltaTime);
+		}
     }
 
     protected override void Attack(BaseUnit target)

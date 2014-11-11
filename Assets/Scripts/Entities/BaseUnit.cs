@@ -12,7 +12,6 @@ public abstract class BaseUnit : MonoBehaviour
     public Sprite sprite;
     public float health;
     public float moveSpeed;
-	public BaseUnit player;
     public EntityState state;
     #endregion
 
@@ -21,20 +20,19 @@ public abstract class BaseUnit : MonoBehaviour
 //	enum Direction : int {N=1, NE=2, E=3, SE=4, S=5, SW=6, W=7, NW=8};
 
 //	variable declarations
-	protected int maxHealth;
-	protected int curHealth;
+	protected float maxHealth;
 	protected string myName;
 	//protected Weapon myWeapon;
 	protected GameObject myCharacter;
 
 //  properties for accessing the variables publicly
-	public int MaxHealth { 
+	public float MaxHealth { 
 		get { return maxHealth; } 
         set { maxHealth = value;} 
 	}
-    public int CurHealth {
-		get { return curHealth; }
-        set { curHealth = value;} 
+    public float Health {
+		get { return health; }
+        set { health = value;} 
 	}
     public string MyName{
 		get { return myName; }
@@ -65,8 +63,7 @@ public abstract class BaseUnit : MonoBehaviour
     // Use this for initialization
 	void Start () {
 //	this method should be overwritten in children to set things correctly. This is just dummy data
-		MaxHealth = 20;
-		CurHealth = 20;
+		MaxHealth = health = 20;
 		MyName = "Base Unit";
 		Character = new GameObject(MyName);
 		Character.AddComponent("Animator");
