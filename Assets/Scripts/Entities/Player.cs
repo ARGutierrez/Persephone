@@ -4,17 +4,38 @@ using System.Collections;
 public class Player : BaseUnit
 {
     #region Persephone Base Stats
-    private readonly float BASE_HEALTH = 10f;
-    private readonly float BASE_SPEED = 10f;
+    private readonly int BASE_HEALTH = 100;
+    private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
+	private readonly int BASE_WILL = 15; //assuming skselton is learned at the start? may need to be 10
     #endregion
 
+	//variables
 	MyInput input;
+	protected int maxWill;
+	protected int curWill;
 
-    void Start () {
+	public int MaxWill{
+		get { return maxWill; } 
+		set { maxWill = value;} 
+	}
+	public int CurWill{
+		get { return curWill; } 
+		set {	
+			if(value > maxWill)
+				curWill = maxWill;
+			else
+				curWill = value;
+		} 
+	}
+
+	void Start () {
 		gameObject.GetComponent<SpriteRenderer>().sprite = sprite; 
 		input = Reference.input;
         moveSpeed = BASE_SPEED;
-		health = BASE_HEALTH;
+		CurHealth = BASE_HEALTH;
+		MaxHealth = BASE_HEALTH;
+		CurWill = BASE_WILL;
+		MaxWill = BASE_WILL;
 	}
 	
 	// Update is called once per frame but we 
@@ -56,4 +77,18 @@ public class Player : BaseUnit
     {
 		state = EntityState.DYING;
     }
+
+	//TODO specifiy which minions are currently learned?
+	private void learnNewMinion(){
+		MaxWill += 5;
+		CurWill += 5;
+	}
+
+	private void summonSkeleton(){
+		if (CurWill >= 3) {
+			//TODO spawn a skeleton
+			CurWill -= 3;
+		}
+	}
+
 }

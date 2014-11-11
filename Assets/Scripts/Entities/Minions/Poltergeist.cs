@@ -12,8 +12,8 @@ public class Poltergeist : BaseUnit {
 		{
 			player = playerObj.GetComponent<BaseUnit>();
 		}
-		//set health and moveSpeed
-		health = 1; //poltergeist has only 1 hp
+		//set CurHealth and moveSpeed
+		CurHealth = 1; //poltergeist has only 1 hp
 		moveSpeed = 20f; // poltergeist has fast movement
 		
 	}
@@ -21,7 +21,7 @@ public class Poltergeist : BaseUnit {
 	// Update is called once per frame
 	void Update () {
 		//code for death
-		if (health <= 0) {
+		if (CurHealth <= 0) {
 			Die ();
 		}
 		BaseUnit target = FindTarget ();//finds the closest enemy target
@@ -60,7 +60,7 @@ public class Poltergeist : BaseUnit {
 				Move (target);
 			}
 			
-			if (target.health <= 0) {
+			if (target.CurHealth <= 0) {
 				target = FindTarget ();//finds the closest enemy target
 				if (target) {
 					state = EntityState.ATTACKING;

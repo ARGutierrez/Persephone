@@ -12,8 +12,8 @@ public class Zombie : BaseUnit {
 		{
 			player = playerObj.GetComponent<BaseUnit>();
 		}
-		//set health and moveSpeed
-		health = 100; //placeholder value
+		//set CurHealth and moveSpeed
+		CurHealth = 100; //placeholder value
 		moveSpeed = 15f; // faster than player base speed
 		
 		
@@ -23,7 +23,7 @@ public class Zombie : BaseUnit {
 	void Update () {
 		
 		//code for death
-		if (health <= 0) {
+		if (CurHealth <= 0) {
 			Die ();
 		}
 		BaseUnit target = FindTarget ();//finds the closest enemy target
@@ -61,7 +61,7 @@ public class Zombie : BaseUnit {
 				Move (target);
 			}
 			
-			if (target.health <= 0) {
+			if (target.CurHealth <= 0) {
 				target = FindTarget ();//finds the closest enemy target
 				if (target) {
 					state = EntityState.ATTACKING;

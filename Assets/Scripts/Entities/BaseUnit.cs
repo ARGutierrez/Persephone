@@ -10,7 +10,7 @@ public abstract class BaseUnit : MonoBehaviour
 
     #region Unit Properties
     public Sprite sprite;
-    public float health;
+    //public float health;
     public float moveSpeed;
 	public BaseUnit player;
     public EntityState state;
@@ -34,7 +34,12 @@ public abstract class BaseUnit : MonoBehaviour
 	}
     public int CurHealth {
 		get { return curHealth; }
-        set { curHealth = value;} 
+        set { 
+			if(value > maxHealth)
+				curHealth = maxHealth;			
+			else
+				curHealth = value;
+		} 
 	}
     public string MyName{
 		get { return myName; }
