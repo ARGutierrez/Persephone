@@ -12,13 +12,8 @@ public abstract class BaseUnit : MonoBehaviour
     public Sprite sprite;
     //public float health;
     public float moveSpeed;
-	public BaseUnit player;
     public EntityState state;
     #endregion
-
-//	enumeration for moving 8 directions. Start at 1, move around compass clockwise
-//	TODO this may or may not be useful so for now It's commented out
-//	enum Direction : int {N=1, NE=2, E=3, SE=4, S=5, SW=6, W=7, NW=8};
 
 //	variable declarations
 	protected int maxHealth;
@@ -69,7 +64,7 @@ public abstract class BaseUnit : MonoBehaviour
 
     // Use this for initialization
 	void Start () {
-//	this method should be overwritten in children to set things correctly. This is just dummy data
+	//	this method should be overwritten in children to set things correctly. This is just dummy data
 		MaxHealth = 20;
 		CurHealth = 20;
 		MyName = "Base Unit";
