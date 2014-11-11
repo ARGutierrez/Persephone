@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GenericEnemy : BaseUnit 
 {
-	
+	Player player;
 	// Use this for initialization
 	void Start () 
 	{
@@ -12,7 +12,7 @@ public class GenericEnemy : BaseUnit
 		GameObject playerObj = GameObject.Find("Player");
 		if (playerObj != null)
 		{
-			player = playerObj.GetComponent<BaseUnit>();
+			player = (Player) playerObj.GetComponent<BaseUnit>();
 		}
 
 		//set health and moveSpeed
