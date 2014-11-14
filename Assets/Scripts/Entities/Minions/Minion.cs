@@ -16,17 +16,6 @@ public abstract class Minion : BaseUnit
 	public int currentWP = 0;
 	protected Player player;
 
-
-	void Start ()
-	{
-
-	}
-	
-	void Update ()
-	{
-		
-	}
-	
 	protected Player getPlayer() {
 		if (Reference.player != null) {
 			player = Reference.player;
@@ -42,24 +31,22 @@ public abstract class Minion : BaseUnit
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
 		
 		//iterates through array of enemies
-		float closestEnemyDist = 20; //max distance of PhantomWarrior is 16 feet
+		float agroRange = 20; //Distance at which a minion will start attacking.
 		GameObject closestEnemyObj = null;//tracks closest enemy object
 		BaseUnit chosenTarget = null;
 		foreach(GameObject target in minions)
 		{
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
-			if (distFromTarget < closestEnemyDist)
-			{
-				closestEnemyDist = distFromTarget;
+			if (distFromTarget < agroRange) {
+				agroRange = distFromTarget;
 				closestEnemyObj = target;
 			}
 			
 		}
-		if (closestEnemyObj != null)
+		if(closestEnemyObj != null)
 		{
 			chosenTarget = closestEnemyObj.GetComponent<BaseUnit>();
 		}
-		
 		return chosenTarget;
 	}
 

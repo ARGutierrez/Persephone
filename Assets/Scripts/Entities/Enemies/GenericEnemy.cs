@@ -122,7 +122,7 @@ public class GenericEnemy : BaseUnit
 		//code for damage dealt and received goes here
 
 	}
-	protected override void Die()
+	public override void Die()
 	{
 		state = EntityState.DYING;
 		Destroy (this.gameObject);
