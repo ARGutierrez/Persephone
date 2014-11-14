@@ -9,6 +9,8 @@ public class Player : BaseUnit
 	private readonly int BASE_WILL = 15; //assuming skselton is learned at the start? may need to be 10
     #endregion
 
+	public Skeleton skely;
+
 	void Start () {
 		Reference.player = this;
 		input = Reference.input;
@@ -75,9 +77,12 @@ public class Player : BaseUnit
 		CurWill += 5;
 	}
 
-	private void summonSkeleton(){
+	public void summonSkeleton() {
+		//Instantiate(ObjectPool.instance.GetObjectForType("Skeleton", false), Reference.player.transform.position, Reference.player.transform.rotation);
+		ObjectPool.instance.GetObjectForType ("Skeleton", false).transform.position = transform.position;
+
+
 		if (CurWill >= 3) {
-			//TODO spawn a skeleton
 			CurWill -= 3;
 		}
 	}
