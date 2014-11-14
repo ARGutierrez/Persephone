@@ -115,7 +115,7 @@ public class ObjectPool : MonoBehaviour
 	/// <param name='obj'>
 	/// Object to be pooled.
 	/// </param>
-	public void PoolObject ( GameObject obj )
+	public void PoolObject (GameObject obj)
 	{
 		for ( int i=0; i<objectPrefabs.Length; i++)
 		{

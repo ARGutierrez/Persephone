@@ -53,9 +53,8 @@ public abstract class BaseUnit : MonoBehaviour
 	#region Unit Methods
 	//move method now moves unit toward a particular unit
 	protected abstract void Move();
-//	TODO protected abstract void Move(int direction, float speed);
 	protected abstract void Attack();
-	protected abstract void Die();
+	public abstract void Die();
 /*	protected abstract void Die(){
 		Character.SetActive (false);
 	}

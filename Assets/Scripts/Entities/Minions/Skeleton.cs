@@ -18,15 +18,14 @@ public class Skeleton : Minion
     void Start()
     {
         //set CurHealth and moveSpeed
-		MaxHealth = BASE_HEALTH;
-        CurHealth = BASE_HEALTH; //placeholder value
+		CurHealth = MaxHealth = BASE_HEALTH;
         moveSpeed = BASE_SPEED; // higher than player base speed
         followDistance = 10f;//gives distance skeleton is from persephone
+		attackRange = ATTACK_RANGE;
         seeker = GetComponent<Seeker>();
 
 		if (player == null)
 			getPlayer();
-
     }
 
 	/// <summary>
@@ -56,7 +55,7 @@ public class Skeleton : Minion
 				state = EntityState.IDLE;
 			}
 		} else { // If target is not player
-			if(distFromTarget > ATTACK_RANGE) {
+			if(distFromTarget > attackRange) {
 				if(lastRepath < Time.time) {
 					seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
 					lastRepath = Time.time + repathRate;
@@ -86,8 +85,11 @@ public class Skeleton : Minion
 
 		if (currentWP >= path.vectorPath.Count)
 				currentWP = 0;
-		else
-			transform.position = Vector3.MoveTowards(transform.position, path.vectorPath[currentWP], moveSpeed * Time.deltaTime);
+		else {
+			Vector3 dir = (path.vectorPath[currentWP]-transform.position).normalized;
+			dir *= moveSpeed * Time.deltaTime;
+			transform.Translate(dir);
+		}
 		currentWP ++;
     }
 
@@ -96,12 +98,10 @@ public class Skeleton : Minion
 		target.CurHealth = target.CurHealth - DAMAGE_PER_ATTACK;
     }
 
-    protected override void Die()
+	//return used will and add back to the pool
+    public override void Die()
     {
-		//Need code to delay death for legnth of animation.
-        //state = EntityState.DYING;
-        Destroy(this.gameObject);
-        //add code to give will back to persephone
-		(player).CurWill += WILL_COST;
+		Will.returnWill(WILL_COST);
+		ObjectPool.instance.PoolObject(this.gameObject);
     }
 }
