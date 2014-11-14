@@ -42,11 +42,11 @@ public class Player : BaseUnit
 	// Update is called once per frame but we 
 	void Update () 
     {
-        Move(null);
+        Move();
 	}
 
 	//players move command is passed an empty variable to avoid an error
-    protected override void Move(BaseUnit none)
+    protected override void Move()
     {
 		float h = input.GetAxis("Horizontal");
 		float v = input.GetAxis("Vertical");
@@ -60,7 +60,7 @@ public class Player : BaseUnit
 		}
 	}
 	
-	protected override void Attack(BaseUnit target)
+	protected override void Attack()
     {
 		state = EntityState.ATTACKING;
     }
