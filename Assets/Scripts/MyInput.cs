@@ -14,6 +14,10 @@ public class MyInput : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(Input.GetButtonDown("Summon")) {
+			Reference.player.summonSkeleton();
+		}
+
 		if (Application.platform == RuntimePlatform.Android) {
 			MobileInput();
 		} else {

@@ -11,7 +11,11 @@ public abstract class Minion : BaseUnit
 	protected BaseUnit target;
 	protected Seeker seeker;
 	protected Path path;
+	public float repathRate = 1f;
+	public float lastRepath = 0;
+	public int currentWP = 0;
 	protected Player player;
+
 
 	void Start ()
 	{
@@ -39,15 +43,14 @@ public abstract class Minion : BaseUnit
 		
 		//iterates through array of enemies
 		float closestEnemyDist = 20; //max distance of PhantomWarrior is 16 feet
-		float currentEnemyDist = 20;//tracks the distance of target object 
 		GameObject closestEnemyObj = null;//tracks closest enemy object
 		BaseUnit chosenTarget = null;
 		foreach(GameObject target in minions)
 		{
-			currentEnemyDist = Vector3.Distance(target.transform.position, transform.position);
-			if (currentEnemyDist < closestEnemyDist)
+			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
+			if (distFromTarget < closestEnemyDist)
 			{
-				closestEnemyDist = currentEnemyDist;
+				closestEnemyDist = distFromTarget;
 				closestEnemyObj = target;
 			}
 			

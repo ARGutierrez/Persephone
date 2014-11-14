@@ -47,15 +47,21 @@ public class Skeleton : Minion
 
 		if(target == player) { //If the target is the player
 			if(distFromTarget > followDistance) {
-				seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
-				state = EntityState.MOVING;
+				if(lastRepath < Time.time) {
+					seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
+					lastRepath = Time.time + repathRate;
+					state = EntityState.MOVING;
+				}
 			} else {
 				state = EntityState.IDLE;
 			}
 		} else { // If target is not player
 			if(distFromTarget > ATTACK_RANGE) {
-				seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
-				state = EntityState.MOVING;
+				if(lastRepath < Time.time) {
+					seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
+					lastRepath = Time.time + repathRate;
+					state = EntityState.MOVING;
+				}
 			} else {
 				state = EntityState.ATTACKING;
 			}
@@ -78,8 +84,11 @@ public class Skeleton : Minion
 			return;
 		}
 
-		//Advance to the next waypoint.
-		transform.position = Vector3.MoveTowards(transform.position, path.vectorPath[1], moveSpeed * Time.deltaTime);
+		if (currentWP >= path.vectorPath.Count)
+				currentWP = 0;
+		else
+			transform.position = Vector3.MoveTowards(transform.position, path.vectorPath[currentWP], moveSpeed * Time.deltaTime);
+		currentWP ++;
     }
 
     protected override void Attack()
