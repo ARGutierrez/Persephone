@@ -4,7 +4,7 @@ using Pathfinding;
 
 public abstract class Minion : BaseUnit
 {
-	protected float distFromPlayer;
+	protected float distFromTarget;
 	//the distance that persephone can be from skeleton before he moves to follow
 	protected float followDistance;
 	protected float attackRange;
@@ -38,8 +38,8 @@ public abstract class Minion : BaseUnit
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
 		
 		//iterates through array of enemies
-		float closestEnemyDist = 200; //max distance of PhantomWarrior is 16 feet
-		float currentEnemyDist = 200;//tracks the distance of target object 
+		float closestEnemyDist = 20; //max distance of PhantomWarrior is 16 feet
+		float currentEnemyDist = 20;//tracks the distance of target object 
 		GameObject closestEnemyObj = null;//tracks closest enemy object
 		BaseUnit chosenTarget = null;
 		foreach(GameObject target in minions)
@@ -58,5 +58,16 @@ public abstract class Minion : BaseUnit
 		}
 		
 		return chosenTarget;
+	}
+
+	public void OnPathComplete (Path p) {
+		p.Claim (this);
+		if (!p.error) {
+			if (path != null) path.Release (this);
+			path = p;
+		} else {
+			p.Release (this);
+			Debug.Log ("Oh noes, the target was not reachable: "+p.errorLog);
+		}
 	}
 }

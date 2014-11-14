@@ -20,7 +20,7 @@ public class Poltergeist : Minion {
 			Die ();
 		}
 		target = FindTarget();//finds the closest enemy target
-		distFromPlayer = Vector3.Distance (player.transform.position, transform.position);
+		distFromTarget = Vector3.Distance (player.transform.position, transform.position);
 
 		if (state == EntityState.IDLE) {
 			
@@ -29,26 +29,26 @@ public class Poltergeist : Minion {
 			//checks if target is not null
 			if (target) {
 				state = EntityState.ATTACKING;
-			} else if (distFromPlayer > followDistance) {
+			} else if (distFromTarget > followDistance) {
 				state = EntityState.MOVING;
 			}
 		}
 		if (state == EntityState.MOVING) {
 			//move to persephone
-			Move (player);	
+			Move ();	
 			//checks if target is not null
 			if (target) {
 				state = EntityState.ATTACKING;
-			} else if (distFromPlayer <= followDistance) {
+			} else if (distFromTarget <= followDistance) {
 				state = EntityState.IDLE;
 			}
 		}
 		if (state == EntityState.ATTACKING) {
-			float distFromTarget= Vector3.Distance (target.transform.position, transform.position);;
+			distFromTarget= Vector3.Distance (target.transform.position, transform.position);;
 			if (distFromTarget <= attackRange) {
-				Attack (target);
+				Attack ();
 			} else {
-				Move (target);
+				Move ();
 			}
 			
 			if (target.CurHealth <= 0) {
@@ -57,20 +57,20 @@ public class Poltergeist : Minion {
 					state = EntityState.ATTACKING;
 				} else {
 					state = EntityState.MOVING;
-					Move (player);
+					Move ();
 				}
 			}
 			
 		}
 	}
 
-	protected override void Move(BaseUnit targetUnit)
+	protected override void Move()
 	{
 		
-		transform.position = Vector3.MoveTowards (transform.position, targetUnit.transform.position, moveSpeed * Time.deltaTime);
+		transform.position = Vector3.MoveTowards (transform.position, target.transform.position, moveSpeed * Time.deltaTime);
 	}
 	
-	protected override void Attack(BaseUnit enemy)
+	protected override void Attack()
 	{
 		//do Attack animation
 		//code for damage dealt and received goes here
