@@ -78,7 +78,10 @@ public class Player : BaseUnit
 	}
 
 	public void summonSkeleton() {
-		Instantiate (skely, Reference.player.transform.position, Reference.player.transform.rotation);
+		//Instantiate(ObjectPool.instance.GetObjectForType("Skeleton", false), Reference.player.transform.position, Reference.player.transform.rotation);
+		ObjectPool.instance.GetObjectForType ("Skeleton", false).transform.position = transform.position;
+
+
 		if (CurWill >= 3) {
 			CurWill -= 3;
 		}
