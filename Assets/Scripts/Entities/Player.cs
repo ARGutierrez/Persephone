@@ -58,7 +58,12 @@ public class Player : BaseUnit
 	}
 
 	public void Summon(string minion, int cost) {
-		if(Will.useWill(cost))
-			ObjectPool.instance.GetObjectForType(minion, false).transform.position = transform.position;
+		//creates a variable that checks mouse position
+		Vector3 spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		spawnPos.z = 2;
+		if (Will.useWill (cost)) {
+						//spawns minion at mouse position
+						ObjectPool.instance.GetObjectForType (minion, false).transform.position = spawnPos;
+				}
 	}
 }
