@@ -8,6 +8,9 @@ public class Player : BaseUnit
     private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
 	private readonly int BASE_WILL = 15; //assuming skselton is learned at the start? may need to be 10
     #endregion
+	
+	MyInput input;
+
 
 	void Start () {
 		Reference.player = this;
@@ -16,37 +19,17 @@ public class Player : BaseUnit
 		moveSpeed = BASE_SPEED;
 		CurHealth = BASE_HEALTH;
 		MaxHealth = BASE_HEALTH;
-		CurWill = BASE_WILL;
-		MaxWill = BASE_WILL;
-	}
-	
-	//variables
-	MyInput input;
-	protected int maxWill;
-	protected int curWill;
-
-	public int MaxWill{
-		get { return maxWill; } 
-		set { maxWill = value;} 
-	}
-	public int CurWill{
-		get { return curWill; } 
-		set {	
-			if(value > maxWill)
-				curWill = maxWill;
-			else
-				curWill = value;
-		} 
+		Will.modifyWill(BASE_WILL);
 	}
 
 	// Update is called once per frame but we 
 	void Update () 
     {
-        Move(null);
+        Move();
 	}
 
 	//players move command is passed an empty variable to avoid an error
-    protected override void Move(BaseUnit none)
+    protected override void Move()
     {
 		float h = input.GetAxis("Horizontal");
 		float v = input.GetAxis("Vertical");
@@ -60,26 +43,22 @@ public class Player : BaseUnit
 		}
 	}
 	
-	protected override void Attack(BaseUnit target)
+	protected override void Attack()
     {
 		state = EntityState.ATTACKING;
     }
-    protected override void Die()
+    public override void Die()
     {
 		state = EntityState.DYING;
     }
 
 	//TODO specifiy which minions are currently learned?
 	private void learnNewMinion(){
-		MaxWill += 5;
-		CurWill += 5;
+		Will.modifyWill(5);
 	}
 
-	private void summonSkeleton(){
-		if (CurWill >= 3) {
-			//TODO spawn a skeleton
-			CurWill -= 3;
-		}
+	public void Summon(string minion, int cost) {
+		if(Will.useWill(cost))
+			ObjectPool.instance.GetObjectForType(minion, false).transform.position = transform.position;
 	}
-
 }

@@ -4,25 +4,18 @@ using Pathfinding;
 
 public abstract class Minion : BaseUnit
 {
-	protected float distFromPlayer;
+	protected float distFromTarget;
 	//the distance that persephone can be from skeleton before he moves to follow
 	protected float followDistance;
 	protected float attackRange;
 	protected BaseUnit target;
 	protected Seeker seeker;
 	protected Path path;
+	public float repathRate = 1f;
+	public float lastRepath = 0;
+	public int currentWP = 0;
 	protected Player player;
 
-	void Start ()
-	{
-
-	}
-	
-	void Update ()
-	{
-		
-	}
-	
 	protected Player getPlayer() {
 		if (Reference.player != null) {
 			player = Reference.player;
@@ -38,25 +31,33 @@ public abstract class Minion : BaseUnit
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
 		
 		//iterates through array of enemies
-		float closestEnemyDist = 200; //max distance of PhantomWarrior is 16 feet
-		float currentEnemyDist = 200;//tracks the distance of target object 
+		float agroRange = 20; //Distance at which a minion will start attacking.
 		GameObject closestEnemyObj = null;//tracks closest enemy object
 		BaseUnit chosenTarget = null;
 		foreach(GameObject target in minions)
 		{
-			currentEnemyDist = Vector3.Distance(target.transform.position, transform.position);
-			if (currentEnemyDist < closestEnemyDist)
-			{
-				closestEnemyDist = currentEnemyDist;
+			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
+			if (distFromTarget < agroRange) {
+				agroRange = distFromTarget;
 				closestEnemyObj = target;
 			}
 			
 		}
-		if (closestEnemyObj != null)
+		if(closestEnemyObj != null)
 		{
 			chosenTarget = closestEnemyObj.GetComponent<BaseUnit>();
 		}
-		
 		return chosenTarget;
+	}
+
+	public void OnPathComplete (Path p) {
+		p.Claim (this);
+		if (!p.error) {
+			if (path != null) path.Release (this);
+			path = p;
+		} else {
+			p.Release (this);
+			Debug.Log ("Oh noes, the target was not reachable: "+p.errorLog);
+		}
 	}
 }

@@ -14,13 +14,39 @@ public class MyInput : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(Input.GetButtonDown("Summon")) {
+			Reference.player.Summon("Skeleton", 3);
+		}
+
+		/*if(Input.GetButtonDown("Summon2")) {
+			Reference.player.Summon("Skeleton", 3);
+		}
+
+		if(Input.GetButtonDown("Summon3")) {
+			Reference.player.Summon("Skeleton", 3);
+		}
+
+		if(Input.GetButtonDown("Summon4")) {
+			Reference.player.Summon("Skeleton", 3);
+		}
+
+		if(Input.GetButtonDown("Summon5")) {
+			Reference.player.Summon("Skeleton", 3);
+		}*/
+
+		if(Input.GetButtonDown("Despawn")) {
+			GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
+			BaseUnit minion = (BaseUnit) minions[0].GetComponent<BaseUnit>();
+			minion.Die();
+		}
+
 		if (Application.platform == RuntimePlatform.Android) {
 			MobileInput();
 		} else {
 			PCInput(); 	
 		}
 	}
-	
+
 	//This function will handl any PC input we need such as keyboard input
 	private void PCInput() {
 		horizontal = Input.GetAxisRaw("Horizontal");

@@ -4,8 +4,9 @@ using System.Collections;
 public class GenericEnemy : BaseUnit 
 {
 	Player player;
+	BaseUnit target;
 	// Use this for initialization
-	void Start () 
+	void Start() 
 	{
 		state = EntityState.IDLE;
 		//Finds player GameObject, sets BaseUnit player to that Object
@@ -58,9 +59,9 @@ public class GenericEnemy : BaseUnit
 			//gives distance minion is from enemy
 			float distFromTarget = Vector3.Distance (target.transform.position, transform.position);
 			if (distFromTarget <= attackRange) {
-				Attack (target);
+				Attack ();
 			} else {
-				Move (target);
+				Move ();
 			}
 			
 			if (target.CurHealth <= 0) {
@@ -109,19 +110,19 @@ public class GenericEnemy : BaseUnit
 		return chosenTarget;
 		
 	}
-	protected override void Move(BaseUnit targetUnit)
+	protected override void Move()
 	{
-		transform.position = Vector3.MoveTowards (transform.position, targetUnit.transform.position, moveSpeed * Time.deltaTime);
+		//transform.position = Vector3.MoveTowards (transform.position, target.transform.position, moveSpeed * Time.deltaTime);
 		
 	}
 	
-	protected override void Attack(BaseUnit minion)
+	protected override void Attack()
 	{
 		//do Attack animation
 		//code for damage dealt and received goes here
 
 	}
-	protected override void Die()
+	public override void Die()
 	{
 		state = EntityState.DYING;
 		Destroy (this.gameObject);
