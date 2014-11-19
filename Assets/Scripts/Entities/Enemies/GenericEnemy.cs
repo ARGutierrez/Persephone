@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class GenericEnemy : BaseUnit 
 {
 	Player player;
 	BaseUnit target;
+
+    Seeker seeker;
+    public float nextWaypointDistance = 3;
+    public float lastRepath = -999;
+    public float repathRate = 1f;
+
+    Path path;
+    int currentWP = 0;
+
+    float facingDir;
+
 	// Use this for initialization
 	void Start() 
 	{
@@ -19,6 +31,7 @@ public class GenericEnemy : BaseUnit
 		//set health and moveSpeed
 		curHealth = 30; //placeholder value
 		moveSpeed = 15f; // higher than player base speed so you can't run
+        seeker = GetComponent<Seeker>();
 
 		
 	}
@@ -31,12 +44,31 @@ public class GenericEnemy : BaseUnit
 			Die ();
 		}
 		BaseUnit target = FindTarget ();//finds the closest enemy target
+        if (target == null) target = player;
 
 
 		//gives distance enemy is from persephone
 		float distFromPlayer = Vector3.Distance (player.transform.position, transform.position);
+        Vector3 facing = player.transform.position - transform.position;
+        if (facing.x < 0)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+
+        }
 		float attackRange = 4f; 
 		float aggroRange = 20f;//Enemy will try to attack enemies at 20 feet
+
+        if (lastRepath < Time.time)
+        {
+            path = seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
+            lastRepath = Time.time + repathRate;
+            state = EntityState.MOVING;
+        }
+
 		if (state == EntityState.IDLE) {
 			
 			// play idle animation
@@ -79,6 +111,10 @@ public class GenericEnemy : BaseUnit
 			}
 			
 		}
+        if (state == EntityState.MOVING)
+        {
+            Move();
+        }
 	
 	}
 	// this method checks the enemy's surroundings and finds the closest minion
@@ -113,6 +149,20 @@ public class GenericEnemy : BaseUnit
 	protected override void Move()
 	{
 		//transform.position = Vector3.MoveTowards (transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        if (path == null)
+        {
+            return;
+        }
+
+        if (currentWP >= path.vectorPath.Count)
+            currentWP = 0;
+        else
+        {
+            Vector3 dir = (path.vectorPath[currentWP] - transform.position).normalized;
+            dir *= moveSpeed * Time.deltaTime;
+            transform.Translate(dir);
+        }
+        currentWP++;
 		
 	}
 	
@@ -127,4 +177,19 @@ public class GenericEnemy : BaseUnit
 		state = EntityState.DYING;
 		Destroy (this.gameObject);
 	}
+
+    public void OnPathComplete(Path p)
+    {
+        p.Claim(this);
+        if (!p.error)
+        {
+            if (path != null) path.Release(this);
+            path = p;
+        }
+        else
+        {
+            p.Release(this);
+            Debug.Log("Oh noes, the target was not reachable: " + p.errorLog);
+        }
+    }
 }
