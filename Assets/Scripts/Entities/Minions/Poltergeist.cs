@@ -6,12 +6,13 @@ public class Poltergeist : Minion {
 	#region Skeleton Base Stats
 	private readonly int BASE_HEALTH = 60;
 	private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
-	private readonly int WILL_COST = 3; 
+	public static readonly int WILL_COST = 3; 
 	private readonly int DAMAGE_PER_ATTACK = 10;
 	private readonly float ATTACK_RANGE = 4f;
+	private readonly float AGGRO_RANGE = 4f;
 	#endregion
 	
-	public float nextWaypointDistance = 3;
+	private float lastAttack, attackRate = 1;
 	
 	// Use this for initialization
 	void Start()
@@ -21,6 +22,7 @@ public class Poltergeist : Minion {
 		moveSpeed = BASE_SPEED; // higher than player base speed
 		followDistance = 10f;//gives distance skeleton is from persephone
 		attackRange = ATTACK_RANGE;
+		aggroRange = AGGRO_RANGE;
 		seeker = GetComponent<Seeker>();
 		
 		if (player == null)
@@ -69,33 +71,17 @@ public class Poltergeist : Minion {
 		case EntityState.DYING: Die(); break;
 		}
 	}
-
-	protected override void Move()
-	{
-		if (path == null) {
-			return;
-		}
-		
-		if (currentWP >= path.vectorPath.Count)
-			currentWP = 0;
-		else {
-			Vector3 dir = (path.vectorPath[currentWP]-transform.position).normalized;
-			dir *= moveSpeed * Time.deltaTime;
-			transform.Translate(dir);
-		}
-		currentWP ++;
-	}
 	
 	protected override void Attack()
 	{
-		//do Attack animation
-		//code for damage dealt and received goes here
+		if(lastAttack + attackRate <= Time.time) {
+			target.CurHealth -= DAMAGE_PER_ATTACK;
+			lastAttack = Time.time;
+		}
 	}
 
 	public override void Die()
 	{
-		state = EntityState.DYING;
 		Destroy (this.gameObject);
-		//add code to give will back to persephone
 	}
 }

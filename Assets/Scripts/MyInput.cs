@@ -15,7 +15,7 @@ public class MyInput : MonoBehaviour {
 	
 	void Update () {
 		if(Input.GetButtonDown("Summon")) {
-			Reference.player.Summon("Skeleton", 3);
+			Reference.player.Summon("Skeleton", Skeleton.WILL_COST);
 		}
 
 		/*if(Input.GetButtonDown("Summon2")) {
