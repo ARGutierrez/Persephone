@@ -34,7 +34,7 @@ public class MyInput : MonoBehaviour {
 			Reference.player.Summon("Skeleton", 3);
 		}*/
 
-		if(Input.GetButtonDown("Despawn")) {
+		if(Input.GetButtonDown("Despawn") && Will.count > 0) {
 			GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 			BaseUnit minion = (BaseUnit) minions[0].GetComponent<BaseUnit>();
 			minion.Die();
