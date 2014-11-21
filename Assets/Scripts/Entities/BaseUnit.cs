@@ -51,29 +51,8 @@ public abstract class BaseUnit : MonoBehaviour
 	}
 
 	#region Unit Methods
-	//move method now moves unit toward a particular unit
 	protected abstract void Move();
 	protected abstract void Attack();
 	public abstract void Die();
-/*	protected abstract void Die(){
-		Character.SetActive (false);
-	}
-*/
     #endregion
-
-    // Use this for initialization
-	void Start () {
-	//	this method should be overwritten in children to set things correctly. This is just dummy data
-		MaxHealth = 20;
-		CurHealth = 20;
-		MyName = "Base Unit";
-		Character = new GameObject(MyName);
-		Character.AddComponent("Animator");
-		Character.AddComponent("BoxCollider2D");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
