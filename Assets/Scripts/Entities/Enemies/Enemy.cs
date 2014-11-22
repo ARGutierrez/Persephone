@@ -8,21 +8,34 @@ public abstract class Enemy : BaseUnit
 	protected float distFromTarget;
 	protected float attackRange;
 	protected float aggroRange;
+	protected float playerDistance;
 
 	protected Seeker seeker;
 	protected Path path;
+	protected Player player;
 	public float repathRate = 1f;
 	public float lastRepath = 0;
 	public int currentWP = 0;
 	public float nextWaypointDistance = 3;
-
+	
+	protected Player getPlayer() {
+		if (Reference.player != null) {
+			player = Reference.player;
+			return Reference.player;
+		} else
+			return null;
+	}
 	protected BaseUnit FindTarget()
 	{
-		//finds all objects with tag Enemy and assigns them to a group
+
+		//finds all objects with tag Minion and assigns them to a group
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 
 		//Distance at which a minion will start attacking.
 		float closestDist = aggroRange;
+		//checks enemy distance from player
+		getPlayer ();
+		playerDistance = Vector3.Distance(player.transform.position, transform.position);
 		GameObject closestEnemyObj = null;//tracks closest enemy object
 		foreach(GameObject target in minions) {
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
@@ -31,6 +44,10 @@ public abstract class Enemy : BaseUnit
 				closestEnemyObj = target;
 			}
 		}
+		//if player is closer than minion, attack player first
+		if (playerDistance < closestDist) 
+			return player.GetComponent<BaseUnit>();
+		//if enemy target is 
 		if(closestEnemyObj != null)
 			return closestEnemyObj.GetComponent<BaseUnit>();
 		else
