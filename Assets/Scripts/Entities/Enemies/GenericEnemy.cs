@@ -17,7 +17,8 @@ public class GenericEnemy : BaseUnit
 		}
 
 		//set health and moveSpeed
-		curHealth = 30; //placeholder value
+        MaxHealth = 30;
+		CurHealth = 30; //placeholder value
 		moveSpeed = 15f; // higher than player base speed so you can't run
 
 		
