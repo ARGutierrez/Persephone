@@ -83,5 +83,6 @@ public class Valkyrie : Minion {
 	public override void Die()
 	{
 		Destroy (this.gameObject);
+		DestroyObject (marker);
 	}
 }

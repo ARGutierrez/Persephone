@@ -16,6 +16,9 @@ public abstract class Enemy : BaseUnit
 	public int currentWP = 0;
 	public float nextWaypointDistance = 3;
 
+	protected GameObject marker;
+	protected Transform minimap;
+
 	protected BaseUnit FindTarget()
 	{
 		//finds all objects with tag Enemy and assigns them to a group
@@ -67,5 +70,6 @@ public abstract class Enemy : BaseUnit
 		//ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
 		this.gameObject.SetActive (false);
 		DestroyObject (this);
+		DestroyObject (marker);
 	}
 }

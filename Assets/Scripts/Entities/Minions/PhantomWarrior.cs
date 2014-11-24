@@ -85,5 +85,6 @@ public class PhantomWarrior : Minion {
 	public override void Die()
 	{
 		Destroy (this.gameObject);
+		DestroyObject (marker);
 	}
 }

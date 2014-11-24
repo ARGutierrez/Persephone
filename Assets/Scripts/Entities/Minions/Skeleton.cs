@@ -25,6 +25,12 @@ public class Skeleton : Minion
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
         seeker = GetComponent<Seeker>();
+		//map marker
+		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
+		marker = Instantiate(Resources.Load("MinionMark")) as GameObject;
+		marker.transform.parent = minimap.transform;
+		marker.GetComponent<MinionMark>().minion = gameObject;
+
 
 		if (player == null)
 			getPlayer();
@@ -92,5 +98,6 @@ public class Skeleton : Minion
 	{
 		Will.returnWill(WILL_COST);
 		ObjectPool.instance.PoolObject(this.gameObject);
+		DestroyObject (marker);
 	}
 }
