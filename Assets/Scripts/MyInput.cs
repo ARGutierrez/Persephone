@@ -37,7 +37,8 @@ public class MyInput : MonoBehaviour {
 		if(Input.GetButtonDown("Despawn") && Will.count > 0) {
 			GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 			BaseUnit minion = (BaseUnit) minions[0].GetComponent<BaseUnit>();
-			minion.Die();
+            if(minion != null)
+			    minion.Die();
 		}
 
 		if (Application.platform == RuntimePlatform.Android) {
@@ -63,9 +64,9 @@ public class MyInput : MonoBehaviour {
 	public float GetAxis(string axis) {
 		switch (axis)
 		{
-		case "Vertical": return vertical; break;
+		case "Vertical": return vertical; 
 			
-		case "Horizontal": return horizontal; break;
+		case "Horizontal": return horizontal; 
 			
 		default: return 0;
 		}

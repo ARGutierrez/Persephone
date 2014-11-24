@@ -76,4 +76,19 @@ public abstract class Minion : BaseUnit
 		}
 		currentWP ++;
 	}
+
+    public override void TakeDamage(int damage)
+    {
+        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+        if (curHealth == 0)
+            Die();
+    }
+
+    public override void SetFacing(BaseUnit target)
+    {
+        if ((this.transform.position.x - target.transform.position.x) < 0)
+            this.transform.localScale = new Vector3(1, 1, 1);
+        else
+            this.transform.localScale = new Vector3(-1, 1, 1);
+    }
 }

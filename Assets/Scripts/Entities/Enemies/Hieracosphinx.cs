@@ -32,6 +32,7 @@ public class Hieracosphinx : Enemy {
 		temp = FindTarget ();
 		if(temp != null)
 			target = temp;
+        SetFacing(target);
 		if(target != null) { //If we have a target.
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
 			
@@ -65,4 +66,13 @@ public class Hieracosphinx : Enemy {
 			lastAttack = Time.time;
 		}
 	}
+
+
+    public override void SetFacing(BaseUnit target)
+    {
+        if ((this.transform.position.x - target.transform.position.x) < 0)
+            this.transform.localScale = new Vector3(5, 5, 1);
+        else
+            this.transform.localScale = new Vector3(-5, 5, 1);
+    }
 }

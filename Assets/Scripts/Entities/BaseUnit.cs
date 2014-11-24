@@ -12,6 +12,7 @@ public abstract class BaseUnit : MonoBehaviour
     public Sprite sprite;
     //public float health;
     public float moveSpeed;
+    public int DamagePerAttack;
     public EntityState state;
     #endregion
 
@@ -53,6 +54,8 @@ public abstract class BaseUnit : MonoBehaviour
 	#region Unit Methods
 	protected abstract void Move();
 	protected abstract void Attack();
+    public abstract void TakeDamage(int damage);
 	public abstract void Die();
+    public abstract void SetFacing(BaseUnit target);
     #endregion
 }

@@ -65,6 +65,12 @@ public abstract class Enemy : BaseUnit
 		}
 	}
 
+    void Update()
+    {
+        if(target != null)
+            SetFacing(target);
+    }
+
 	protected override void Move() {
 		if (path == null) {
 			return;
@@ -81,8 +87,23 @@ public abstract class Enemy : BaseUnit
 	}
 	
 	public override void Die() {
-		//ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
+		// ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
 		this.gameObject.SetActive (false);
 		DestroyObject (this);
 	}
+
+    public override void TakeDamage(int damage)
+    {
+        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+        if (curHealth == 0)
+           Die();
+    }
+
+    public override void SetFacing(BaseUnit target)
+    {
+        if ((this.transform.position.x - target.transform.position.x) < 0)
+            this.transform.localScale = new Vector3(1, 1, 1);
+        else
+            this.transform.localScale = new Vector3(-1, 1, 1);
+    }
 }
