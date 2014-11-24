@@ -2,14 +2,12 @@ using UnityEngine;
 using System.Collections;
 using Pathfinding;
 
-public abstract class Minion : BaseUnit
+public abstract class Enemy : BaseUnit
 {
+	protected BaseUnit target;
 	protected float distFromTarget;
-	protected float followDistance; //the distance that persephone can be from skeleton before he moves to follow
 	protected float attackRange;
 	protected float aggroRange;
-	protected BaseUnit target;
-	protected Player player;
 
 	protected Seeker seeker;
 	protected Path path;
@@ -18,26 +16,15 @@ public abstract class Minion : BaseUnit
 	public int currentWP = 0;
 	public float nextWaypointDistance = 3;
 
-
-	protected Player getPlayer() {
-		if (Reference.player != null) {
-			player = Reference.player;
-			return Reference.player;
-		} else
-			return null;
-	}
-	
-	
 	protected BaseUnit FindTarget()
 	{
 		//finds all objects with tag Enemy and assigns them to a group
-		GameObject[] minions = GameObject.FindGameObjectsWithTag("Enemy");
-		
-		//iterates through array of enemies
+		GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
+
+		//Distance at which a minion will start attacking.
 		float closestDist = aggroRange;
 		GameObject closestEnemyObj = null;//tracks closest enemy object
-		foreach(GameObject target in minions)
-		{
+		foreach(GameObject target in minions) {
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
 			if (distFromTarget < closestDist) {
 				closestDist = distFromTarget;
@@ -49,7 +36,7 @@ public abstract class Minion : BaseUnit
 		else
 			return null;
 	}
-
+	
 	public void OnPathComplete (Path p) {
 		p.Claim (this);
 		if (!p.error) {
@@ -57,12 +44,11 @@ public abstract class Minion : BaseUnit
 			path = p;
 		} else {
 			p.Release (this);
-			Debug.Log ("Oh noes, the target was not reachable: " + p.errorLog);
+			Debug.Log ("Oh noes, the target was not reachable: "+p.errorLog);
 		}
 	}
 
-	protected override void Move()
-	{
+	protected override void Move() {
 		if (path == null) {
 			return;
 		}
@@ -75,5 +61,11 @@ public abstract class Minion : BaseUnit
 			transform.Translate(dir);
 		}
 		currentWP ++;
+	}
+	
+	public override void Die() {
+		//ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
+		this.gameObject.SetActive (false);
+		DestroyObject (this);
 	}
 }

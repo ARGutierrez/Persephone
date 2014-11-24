@@ -5,14 +5,15 @@ using Pathfinding;
 public class Skeleton : Minion
 {
 	#region Skeleton Base Stats
-	private readonly int BASE_HEALTH = 60;
+	private readonly int BASE_HEALTH = 120;
 	private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
-	private readonly int WILL_COST = 3; 
+	public static readonly int WILL_COST = 3; 
 	private readonly int DAMAGE_PER_ATTACK = 10;
 	private readonly float ATTACK_RANGE = 4f;
+	private readonly float AGGRO_RANGE = 20f;
 	#endregion
-	
-    public float nextWaypointDistance = 3;
+
+	private float lastAttack, attackRate = 1;
 
     // Use this for initialization
     void Start()
@@ -22,6 +23,7 @@ public class Skeleton : Minion
         moveSpeed = BASE_SPEED; // higher than player base speed
         followDistance = 10f;//gives distance skeleton is from persephone
 		attackRange = ATTACK_RANGE;
+		aggroRange = AGGRO_RANGE;
         seeker = GetComponent<Seeker>();
 
 		if (player == null)
@@ -77,31 +79,18 @@ public class Skeleton : Minion
 		}
 	}
 
-    protected override void Move()
-    {
-		if (path == null) {
-			return;
+	protected override void Attack()
+	{
+		if(lastAttack + attackRate <= Time.time) {
+			target.CurHealth -= DAMAGE_PER_ATTACK;
+			lastAttack = Time.time;
 		}
-
-		if (currentWP >= path.vectorPath.Count)
-				currentWP = 0;
-		else {
-			Vector3 dir = (path.vectorPath[currentWP]-transform.position).normalized;
-			dir *= moveSpeed * Time.deltaTime;
-			transform.Translate(dir);
-		}
-		currentWP ++;
-    }
-
-    protected override void Attack()
-    {
-		target.CurHealth = target.CurHealth - DAMAGE_PER_ATTACK;
-    }
-
+	}
+	
 	//return used will and add back to the pool
-    public override void Die()
-    {
+	public override void Die()
+	{
 		Will.returnWill(WILL_COST);
 		ObjectPool.instance.PoolObject(this.gameObject);
-    }
+	}
 }
