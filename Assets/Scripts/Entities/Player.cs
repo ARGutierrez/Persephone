@@ -7,15 +7,22 @@ public class Player : BaseUnit
     private readonly int BASE_HEALTH = 100;
     private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
 	private readonly int BASE_WILL = 15; //assuming skselton is learned at the start? may need to be 10
+    private readonly float ATTACK_DELAY = 1f;
+    private float LAST_ATTACK_TIME = 0f;
     #endregion
-	
+
+    public Vector3 HitPoint;
+
+    Animator anims;
+
 	MyInput input;
 
 
 	void Start () {
 		Reference.player = this;
 		input = Reference.input;
-		gameObject.GetComponent<SpriteRenderer>().sprite = sprite; 
+		gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+        anims = GetComponent<Animator>();
 		moveSpeed = BASE_SPEED;
 		CurHealth = BASE_HEALTH;
 		MaxHealth = BASE_HEALTH;
@@ -26,6 +33,14 @@ public class Player : BaseUnit
 	void Update () 
     {
         Move();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time > LAST_ATTACK_TIME + ATTACK_DELAY)
+            {
+                Attack();
+                LAST_ATTACK_TIME = Time.time;
+            }
+        }
 	}
 
 	//players move command is passed an empty variable to avoid an error
@@ -35,9 +50,13 @@ public class Player : BaseUnit
 		float v = input.GetAxis("Vertical");
 		if(h == 0 && v == 0) {
 			state = EntityState.IDLE;
+            anims.SetBool("IsWalking", false);
 		} else {
 			state = EntityState.MOVING;
+            anims.SetBool("IsWalking", true);
 			Vector3 translate = new Vector3(h, v, 0);
+            if (h < 0) transform.localScale = new Vector3(-1f, 1f, 1);
+            else transform.localScale = new Vector3(1f, 1f, 1);
 			translate = translate.normalized;
 			transform.Translate(translate * moveSpeed * Time.deltaTime);
 		}
@@ -46,7 +65,31 @@ public class Player : BaseUnit
 	protected override void Attack()
     {
 		state = EntityState.ATTACKING;
+        anims.SetTrigger("IsAttacking");
+        Debug.Log(DamagePerAttack);
+
     }
+
+    public void Hit()
+    {
+        Collider2D[] enemiesHit;
+       
+        Vector3 hitOffset = this.transform.TransformPoint(HitPoint);
+        enemiesHit = Physics2D.OverlapCircleAll(hitOffset, 10f);
+        foreach (Collider2D col in enemiesHit)
+        {
+           Enemy enemy = col.gameObject.GetComponent<Enemy>();
+           if (enemy != null)
+           {
+               enemy.TakeDamage(DamagePerAttack);
+           }
+        }
+    }
+
+    public override void TakeDamage(int damage)
+    {
+    }
+
     public override void Die()
     {
 		state = EntityState.DYING;

@@ -64,8 +64,15 @@ public abstract class Enemy : BaseUnit
 	}
 	
 	public override void Die() {
-		//ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
+		// ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
 		this.gameObject.SetActive (false);
 		DestroyObject (this);
 	}
+
+    public override void TakeDamage(int damage)
+    {
+        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+        if (curHealth == 0)
+           Die();
+    }
 }

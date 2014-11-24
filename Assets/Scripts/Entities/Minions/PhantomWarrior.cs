@@ -82,6 +82,11 @@ public class PhantomWarrior : Minion {
 		}
 	}
 
+    public override void TakeDamage(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
 	public override void Die()
 	{
 		Destroy (this.gameObject);

@@ -63,9 +63,9 @@ public class MyInput : MonoBehaviour {
 	public float GetAxis(string axis) {
 		switch (axis)
 		{
-		case "Vertical": return vertical; break;
+		case "Vertical": return vertical; 
 			
-		case "Horizontal": return horizontal; break;
+		case "Horizontal": return horizontal; 
 			
 		default: return 0;
 		}

@@ -68,7 +68,8 @@ public class Skeleton : Minion
 			}
 		}
 
-		if (CurHealth <= 0) {
+		if (CurHealth <= 0) 
+        {
 			state = EntityState.DYING;
 		}
 

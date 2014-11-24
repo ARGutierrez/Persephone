@@ -76,4 +76,11 @@ public abstract class Minion : BaseUnit
 		}
 		currentWP ++;
 	}
+
+    public override void TakeDamage(int damage)
+    {
+        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+        if (curHealth == 0)
+            Die();
+    }
 }

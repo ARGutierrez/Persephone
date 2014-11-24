@@ -1,0 +1,206 @@
+fileFormatVersion: 2
+guid: 1ead8655356c79e4e896dce3be3b8667
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 2
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: PersephoneWalk_0
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 1864
+        width: 235
+        height: 486
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_1
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1864
+        width: 262
+        height: 455
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_2
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 1864
+        width: 279
+        height: 446
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_3
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 1860
+        width: 289
+        height: 445
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_4
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1260
+        width: 277
+        height: 457
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_5
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1260
+        width: 241
+        height: 463
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_6
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 1260
+        width: 223
+        height: 473
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_7
+      rect:
+        serializedVersion: 2
+        x: 1682
+        y: 1260
+        width: 213
+        height: 471
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_8
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 660
+        width: 209
+        height: 457
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_9
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 662
+        width: 241
+        height: 450
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_10
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 664
+        width: 258
+        height: 439
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_11
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 664
+        width: 277
+        height: 439
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_12
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 75
+        width: 263
+        height: 437
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_13
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 67
+        width: 227
+        height: 454
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_14
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 69
+        width: 218
+        height: 462
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PersephoneWalk_15
+      rect:
+        serializedVersion: 2
+        x: 1658
+        y: 71
+        width: 216
+        height: 467
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
