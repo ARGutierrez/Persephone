@@ -56,5 +56,6 @@ public abstract class BaseUnit : MonoBehaviour
 	protected abstract void Attack();
     public abstract void TakeDamage(int damage);
 	public abstract void Die();
+    public abstract void SetFacing(BaseUnit target);
     #endregion
 }

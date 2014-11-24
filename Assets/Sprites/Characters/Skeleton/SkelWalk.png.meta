@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: dabbc5136839d094eb8ac7e6d727c004
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SkelWalk
+    21300002: SkelWalk_0
+    21300004: SkelWalk_1
+    21300006: SkelWalk_2
+    21300008: SkelWalk_3
+    21300010: SkelWalk_4
+    21300012: SkelWalk_5
+    21300014: SkelWalk_6
+    21300016: SkelWalk_7
+    21300018: SkelWalk_8
+    21300020: SkelWalk_9
+    21300022: SkelWalk_10
+    21300024: SkelWalk_11
+    21300026: SkelWalk_12
+    21300028: SkelWalk_13
+    21300030: SkelWalk_14
+    21300032: SkelWalk_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: SkelWalk_0
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1852
+        width: 328
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_1
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 1854
+        width: 330
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_2
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 1854
+        width: 331
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_3
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 1852
+        width: 324
+        height: 489
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_4
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1254
+        width: 319
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_5
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 1259
+        width: 312
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_6
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 1266
+        width: 317
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_7
+      rect:
+        serializedVersion: 2
+        x: 1378
+        y: 1277
+        width: 317
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_8
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 673
+        width: 312
+        height: 473
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_9
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 668
+        width: 312
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_10
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 663
+        width: 317
+        height: 481
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_11
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 659
+        width: 324
+        height: 482
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_12
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 66
+        width: 333
+        height: 475
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_13
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 70
+        width: 330
+        height: 469
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_14
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 77
+        width: 328
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelWalk_15
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 77
+        width: 324
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

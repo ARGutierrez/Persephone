@@ -15,6 +15,8 @@ public class Skeleton : Minion
 
 	private float lastAttack, attackRate = 1;
 
+    Animator anims;
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +27,8 @@ public class Skeleton : Minion
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
         seeker = GetComponent<Seeker>();
+
+        anims = GetComponent<Animator>();
 
 		if (player == null)
 			getPlayer();
@@ -43,6 +47,7 @@ public class Skeleton : Minion
 		if(target == null) {
 			target = player;
 		}
+        SetFacing(target);
 
 		distFromTarget = Vector3.Distance(target.transform.position, transform.position);
 
@@ -52,16 +57,20 @@ public class Skeleton : Minion
 					seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
 					lastRepath = Time.time + repathRate;
 					state = EntityState.MOVING;
+                    anims.SetFloat("WalkSpeed", 1);
 				}
 			} else {
 				state = EntityState.IDLE;
+                anims.SetFloat("WalkSpeed", 0);
 			}
 		} else { // If target is not player
 			if(distFromTarget > attackRange) {
 				if(lastRepath < Time.time) {
+                    anims.SetFloat("WalkSpeed", 1);
 					seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
 					lastRepath = Time.time + repathRate;
 					state = EntityState.MOVING;
+
 				}
 			} else {
 				state = EntityState.ATTACKING;

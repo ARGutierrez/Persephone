@@ -33,7 +33,7 @@ public class HellHound : Enemy
 		temp = FindTarget();
 		if(temp != null)
 			target = temp;
-
+        SetFacing(target);
 		Debug.Log ("Target: " + target);
 
 		if(target != null) { //If we have a target.
@@ -68,4 +68,13 @@ public class HellHound : Enemy
 			lastAttack = Time.time;
 		}
 	}
+
+
+    public override void SetFacing(BaseUnit target)
+    {
+        if ((this.transform.position.x - target.transform.position.x) < 0)
+            this.transform.localScale = new Vector3(6, 6, 1);
+        else
+            this.transform.localScale = new Vector3(-6, 6, 1);
+    }
 }

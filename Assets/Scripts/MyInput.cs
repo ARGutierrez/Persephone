@@ -37,7 +37,8 @@ public class MyInput : MonoBehaviour {
 		if(Input.GetButtonDown("Despawn") && Will.count > 0) {
 			GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 			BaseUnit minion = (BaseUnit) minions[0].GetComponent<BaseUnit>();
-			minion.Die();
+            if(minion != null)
+			    minion.Die();
 		}
 
 		if (Application.platform == RuntimePlatform.Android) {
