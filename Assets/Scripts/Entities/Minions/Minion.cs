@@ -18,6 +18,8 @@ public abstract class Minion : BaseUnit
 	public int currentWP = 0;
 	public float nextWaypointDistance = 3;
 
+	protected GameObject marker;
+	protected Transform minimap;
 
 	protected Player getPlayer() {
 		if (Reference.player != null) {
