@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System;
 
 using UnityEditor;
 using UnityEngine;
@@ -151,6 +152,16 @@ namespace Tiled2Unity
         {
             if (!UseThisImporter())
                 return;
+
+            if (!string.IsNullOrEmpty(this.assetImporter.userData))
+            {
+                // The texture has already been exported and we don't want to reset the texture import settings
+                // This allows users to change their texture settings and have those changes stick.
+                return;
+            }
+
+            // Put some dummy UserData on the importer so we know not to apply these settings again.
+            this.assetImporter.userData = "tiled2unity";
 
             TextureImporter textureImporter = this.assetImporter as TextureImporter;
             textureImporter.textureType = TextureImporterType.Advanced;

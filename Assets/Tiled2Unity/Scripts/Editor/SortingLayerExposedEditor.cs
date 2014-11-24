@@ -11,7 +11,7 @@ using UnityEditor;
 using Tiled2Unity;
 
 [CustomEditor(typeof(Tiled2Unity.SortingLayerExposed))]
-public class SortingLayerExposedEditor : Editor
+public class SortingLayerExposedEditor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {

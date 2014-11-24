@@ -20,12 +20,8 @@ namespace Tiled2Unity
         public List<Frame> frames = new List<Frame>();
         private int currentFrameIndex = 0;
 
-        private Mesh tiledMesh = null;
-
         private void Start()
         {
-            this.tiledMesh = GetComponent<MeshFilter>().mesh;
-
             this.currentFrameIndex = 0;
 
             if (this.frames.Count == 0)
@@ -64,17 +60,23 @@ namespace Tiled2Unity
         {
             float negated = -z;
 
-            Vector3[] vertices = this.tiledMesh.vertices;
-            for (int i = 0; i < vertices.Length; ++i)
+            // Because meshes may be split we have to go over all them in our tree
+            MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+            foreach (var mf in meshFilters)
             {
-                if (vertices[i].z == z)
-                {
-                    vertices[i].z = negated;
-                }
-            }
 
-            // Save the vertices back
-            this.tiledMesh.vertices = vertices;
+                Vector3[] vertices = mf.mesh.vertices;
+                for (int i = 0; i < vertices.Length; ++i)
+                {
+                    if (vertices[i].z == z)
+                    {
+                        vertices[i].z = negated;
+                    }
+                }
+
+                // Save the vertices back
+                mf.mesh.vertices = vertices;
+            }
         }
 
     }

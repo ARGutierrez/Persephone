@@ -84,6 +84,21 @@ namespace Tiled2Unity
             return GetAttributeAsFloat(elem, attrName);
         }
 
+        public static bool GetAttributeAsBoolean(XElement elem, string attrName)
+        {
+            return Convert.ToBoolean(elem.Attribute(attrName).Value);
+        }
+
+        public static bool GetAttributeAsBoolean(XElement elem, string attrName, bool defaultValue)
+        {
+            XAttribute attr = elem.Attribute(attrName);
+            if (attr == null)
+            {
+                return defaultValue;
+            }
+            return GetAttributeAsBoolean(elem, attrName);
+        }
+
         public static string GetAttributeAsFullPath(XElement elem, string attrName)
         {
             return Path.GetFullPath(elem.Attribute(attrName).Value);
