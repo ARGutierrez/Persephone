@@ -14,7 +14,6 @@ namespace Tiled2Unity
     // At this point we should have everything we need to build out any prefabs for the tiled map object
     partial class ImportTiled2Unity
     {
-        // By the time this is called, our assets should be ready to create the map prefab
         public void MeshImported(string objPath)
         {
             string xmlPath = ImportUtils.GetXmlPath(objPath);
@@ -33,13 +32,10 @@ namespace Tiled2Unity
             string prefabName = xmlPrefab.Attribute("name").Value;
             float prefabScale = ImportUtils.GetAttributeAsFloat(xmlPrefab, "scale", 1.0f);
             GameObject tempPrefab = new GameObject(prefabName);
-            HandleTiledAttributes(tempPrefab, xmlPrefab);
             HandleCustomProperties(tempPrefab, xmlPrefab, customImporters);
 
             // Part 2: Build out the prefab
-            // We may have an 'isTrigger' attribute that we want our children to obey
-            bool isTrigger = ImportUtils.GetAttributeAsBoolean(xmlPrefab, "isTrigger", false);
-            AddGameObjectsTo(tempPrefab, xmlPrefab, isTrigger, objPath, customImporters);
+            AddGameObjectsTo(tempPrefab, xmlPrefab, objPath, customImporters);
 
             // Part 3: Allow for customization from other editor scripts to be made on the prefab
             // (These are generally for game-specific needs)
@@ -66,7 +62,7 @@ namespace Tiled2Unity
             UnityEngine.Object.DestroyImmediate(tempPrefab);
         }
 
-        private void AddGameObjectsTo(GameObject parent, XElement xml, bool isParentTrigger, string objPath, IList<ICustomTiledImporter> customImporters)
+        private void AddGameObjectsTo(GameObject parent, XElement xml, string objPath, IList<ICustomTiledImporter> customImporters)
         {
             foreach (XElement goXml in xml.Elements("GameObject"))
             {
@@ -104,12 +100,10 @@ namespace Tiled2Unity
                 AddTileAnimatorsTo(child, goXml);
 
                 // Do we have any collision data?
-                // Check if we are setting 'isTrigger' for ourselves or for our childen
-                bool isTrigger = ImportUtils.GetAttributeAsBoolean(goXml, "isTrigger", isParentTrigger);
-                AddCollidersTo(child, isTrigger, goXml);
+                AddCollidersTo(child, goXml);
 
                 // Do we have any children of our own?
-                AddGameObjectsTo(child, goXml, isTrigger, objPath, customImporters);
+                AddGameObjectsTo(child, goXml, objPath, customImporters);
 
                 // Does this game object have a tag?
                 AssignTagTo(child, goXml);
@@ -194,13 +188,12 @@ namespace Tiled2Unity
             return String.Format("{0}/{1}", parentName, xform.name);
         }
 
-        private void AddCollidersTo(GameObject gameObject, bool isTrigger, XElement xml)
+        private void AddCollidersTo(GameObject gameObject, XElement xml)
         {
             // Box colliders
             foreach (XElement xmlBoxCollider2D in xml.Elements("BoxCollider2D"))
             {
                 BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
-                collider.isTrigger = isTrigger;
                 float width = ImportUtils.GetAttributeAsFloat(xmlBoxCollider2D, "width");
                 float height = ImportUtils.GetAttributeAsFloat(xmlBoxCollider2D, "height");
                 collider.size = new Vector2(width, height);
@@ -211,7 +204,6 @@ namespace Tiled2Unity
             foreach (XElement xmlCircleCollider2D in xml.Elements("CircleCollider2D"))
             {
                 CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
-                collider.isTrigger = isTrigger;
                 float radius = ImportUtils.GetAttributeAsFloat(xmlCircleCollider2D, "radius");
                 collider.radius = radius;
                 collider.center = new Vector2(radius, -radius);
@@ -221,7 +213,6 @@ namespace Tiled2Unity
             foreach (XElement xmlEdgeCollider2D in xml.Elements("EdgeCollider2D"))
             {
                 EdgeCollider2D collider = gameObject.AddComponent<EdgeCollider2D>();
-                collider.isTrigger = isTrigger;
                 string data = xmlEdgeCollider2D.Element("Points").Value;
 
                 // The data looks like this:
@@ -238,7 +229,6 @@ namespace Tiled2Unity
             foreach (XElement xmlPolygonCollider2D in xml.Elements("PolygonCollider2D"))
             {
                 PolygonCollider2D collider = gameObject.AddComponent<PolygonCollider2D>();
-                collider.isTrigger = isTrigger;
 
                 var paths = xmlPolygonCollider2D.Elements("Path").ToArray();
                 collider.pathCount = paths.Count();
@@ -297,24 +287,6 @@ namespace Tiled2Unity
                     frame.DurationMs = ImportUtils.GetAttributeAsInt(frameXml, "duration");
                     tileAnimator.frames.Add(frame);
                 }
-            }
-        }
-
-        private void HandleTiledAttributes(GameObject gameObject, XElement goXml)
-        {
-            // Add the TiledMap component
-            TiledMap map = gameObject.AddComponent<TiledMap>();
-            try
-            {
-                map.NumTilesWide = ImportUtils.GetAttributeAsInt(goXml, "numTilesWide");
-                map.NumTilesHigh = ImportUtils.GetAttributeAsInt(goXml, "numTilesHigh");
-                map.TileWidth = ImportUtils.GetAttributeAsInt(goXml, "tileWidth");
-                map.TileHeight = ImportUtils.GetAttributeAsInt(goXml, "tileHeight");
-            }
-            catch
-            {
-                Debug.LogWarning(String.Format("Error adding TiledMap component. Are you using an old version of Tiled2Unity in your Unity project?"));
-                GameObject.DestroyImmediate(map);
             }
         }
 
