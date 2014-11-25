@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 
 public class MenuActions : MonoBehaviour {
+	public AudioSource buttonClick;
 
     void Awake()
     {
@@ -16,27 +18,26 @@ public class MenuActions : MonoBehaviour {
     
     public void ButtonClick(string description)
     {
-        menuButtons[description].Invoke();
+		String levelToLoad = "";
+		buttonClick.Play();
+
+		switch(description)
+		{
+		case "LoadGame":  break;
+		case "NewGame": levelToLoad = "Level1"; break;
+		case "Prlouge": break;
+		case "Options": levelToLoad = "Options Menu"; break;
+		case "Crdits": break;
+		case "Quit": break;
+		}
+
+		StartCoroutine(Delay(buttonClick.time + .4f, levelToLoad));
     }
 
-    #region properties
-    public Dictionary<string, Action> menuButtons
-    {
-        get
-        {
-            return new Dictionary<string, Action>()
-            {   
-                //TODO: Implement loading logic. Assume multiple saves available.
-                {"LoadGame", () => {} },
-                //Better way is to LoadGame() on a savegame's default ctor.
-                {"NewGame", () => Application.LoadLevel("Level1")},
-                {"Prologue", () => {} },
-                //Wait for art/content to decide how Options should appear
-                {"Options", () => Application.LoadLevel("Options Menu")},
-                {"Credits", () => {} },
-                {"Quit", () => Application.Quit() }
-            };
-        }
-    }
-    #endregion
+	IEnumerator Delay(float delaySec, String level)
+	{
+		yield return new WaitForSeconds(delaySec); 
+		if (!level.Equals(""))
+			Application.LoadLevel(level);
+	}
 }
