@@ -32,9 +32,10 @@ public class HellHound : Enemy
 	void Update () {
 		temp = FindTarget();
 		if(temp != null)
+		{
 			target = temp;
-        SetFacing(target);
-		Debug.Log ("Target: " + target);
+        	SetFacing(target);
+		}
 
 		if(target != null) { //If we have a target.
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
