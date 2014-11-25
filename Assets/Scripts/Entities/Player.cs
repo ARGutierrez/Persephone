@@ -28,7 +28,7 @@ public class Player : BaseUnit
         anims = GetComponent<Animator>();
 		moveSpeed = BASE_SPEED;
 		CurHealth = MaxHealth = BASE_HEALTH;
-		Will.modifyWill(BASE_WILL);
+        Will.modifyWill(20);//(BASE_WILL);
 		monitor = targetBar.GetComponent<HealthMonitor>();
 
 		//Minimap marker
