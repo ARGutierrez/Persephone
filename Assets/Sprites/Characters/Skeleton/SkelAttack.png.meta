@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: 434c6a430895c4e40bb037540b373685
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SkelAttack_0
+    21300002: SkelAttack_1
+    21300004: SkelAttack_2
+    21300006: SkelAttack_3
+    21300008: SkelAttack_4
+    21300010: SkelAttack_5
+    21300012: SkelAttack_6
+    21300014: SkelAttack_7
+    21300016: SkelAttack_8
+    21300018: SkelAttack_9
+    21300020: SkelAttack_10
+    21300022: SkelAttack_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: SkelAttack_0
+      rect:
+        serializedVersion: 2
+        x: 2233
+        y: 70
+        width: 281
+        height: 425
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_1
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 73
+        width: 354
+        height: 467
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_2
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 75
+        width: 349
+        height: 519
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_3
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 51
+        width: 380
+        height: 545
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_4
+      rect:
+        serializedVersion: 2
+        x: 2180
+        y: 639
+        width: 405
+        height: 416
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 625
+        width: 424
+        height: 430
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_6
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 625
+        width: 495
+        height: 430
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_7
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 625
+        width: 501
+        height: 430
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_8
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 1235
+        width: 492
+        height: 430
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_9
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 1238
+        width: 422
+        height: 441
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_10
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 1260
+        width: 306
+        height: 422
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SkelAttack_11
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1274
+        width: 281
+        height: 425
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

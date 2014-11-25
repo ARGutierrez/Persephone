@@ -98,9 +98,16 @@ public class Skeleton : Minion
 
 	protected override void Attack()
 	{
-		if(lastAttack + attackRate <= Time.time) {
-			target.CurHealth -= DAMAGE_PER_ATTACK;
-			lastAttack = Time.time;
+        anims.SetFloat("WalkSpeed", 0);
+		if(lastAttack + attackRate <= Time.time) 
+        {
+            anims.SetTrigger("IsAttacking");
 		}
 	}
+
+    public void Hit()
+    {
+        target.CurHealth -= DAMAGE_PER_ATTACK;
+        lastAttack = Time.time;
+    }
 }
