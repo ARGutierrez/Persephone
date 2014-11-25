@@ -26,8 +26,7 @@ public class Player : BaseUnit
 		gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         anims = GetComponent<Animator>();
 		moveSpeed = BASE_SPEED;
-		CurHealth = BASE_HEALTH;
-		MaxHealth = BASE_HEALTH;
+		CurHealth = MaxHealth = BASE_HEALTH;
 		Will.modifyWill(BASE_WILL);
 
 		//Minimap marker
@@ -93,10 +92,6 @@ public class Player : BaseUnit
                enemy.TakeDamage(DamagePerAttack);
            }
         }
-    }
-
-    public override void TakeDamage(int damage)
-    {
     }
 
     public override void SetFacing(BaseUnit target)

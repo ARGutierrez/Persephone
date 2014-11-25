@@ -24,7 +24,9 @@ public class PhantomWarrior : Minion {
 		followDistance = 10f;//gives distance skeleton is from persephone
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
+		DamagePerAttack = DAMAGE_PER_ATTACK;
 		seeker = GetComponent<Seeker>();
+		will = WILL_COST;
 
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
 		marker = Instantiate(Resources.Load("MinionMark")) as GameObject;
@@ -85,16 +87,5 @@ public class PhantomWarrior : Minion {
 			target.CurHealth -= DAMAGE_PER_ATTACK;
 			lastAttack = Time.time;
 		}
-	}
-
-    public override void TakeDamage(int damage)
-    {
-        throw new System.NotImplementedException();
-    }
-
-	public override void Die()
-	{
-		Destroy (this.gameObject);
-		DestroyObject (marker);
 	}
 }

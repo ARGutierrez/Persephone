@@ -21,12 +21,16 @@ public class Hieracosphinx : Enemy {
 		aggroRange = AGGRO_RANGE;
 		attackRange = ATTACK_RANGE;
 		seeker = GetComponent<Seeker>();
+		DamagePerAttack = DAMAGE_PER_ATTACK;
 
 		//map marker
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
 		marker = Instantiate(Resources.Load("EnemyMark")) as GameObject;
 		marker.transform.parent = minimap.transform;
 		marker.GetComponent<EnemyMark>().enemy = gameObject;
+
+		if (player == null)
+			getPlayer();
 	}
 	
 	/// <summary>
@@ -68,7 +72,7 @@ public class Hieracosphinx : Enemy {
 	
 	protected override void Attack(){
 		if(lastAttack + attackRate <= Time.time) {
-			target.CurHealth -= DAMAGE_PER_ATTACK;
+			target.TakeDamage(DamagePerAttack);
 			lastAttack = Time.time;
 		}
 	}

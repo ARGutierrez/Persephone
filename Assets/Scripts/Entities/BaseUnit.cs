@@ -18,7 +18,7 @@ public abstract class BaseUnit : MonoBehaviour
 
 //	variable declarations
 	protected int maxHealth;
-	protected int curHealth;
+	public int curHealth;
 	protected string myName;
 	//protected Weapon myWeapon;
 	protected GameObject myCharacter;
@@ -55,10 +55,16 @@ public abstract class BaseUnit : MonoBehaviour
 		set { myCharacter = value;}
 	}
 
+	public void TakeDamage(int damage)
+	{
+		curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+		if (curHealth == 0)
+			Die();
+	}
+
 	#region Unit Methods
 	protected abstract void Move();
 	protected abstract void Attack();
-    public abstract void TakeDamage(int damage);
 	public abstract void Die();
     public abstract void SetFacing(BaseUnit target);
     #endregion

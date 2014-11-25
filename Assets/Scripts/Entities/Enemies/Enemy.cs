@@ -8,6 +8,7 @@ public abstract class Enemy : BaseUnit
 	protected float distFromTarget;
 	protected float attackRange;
 	protected float aggroRange;
+	protected Player player;
 
 	protected Seeker seeker;
 	protected Path path;
@@ -16,9 +17,20 @@ public abstract class Enemy : BaseUnit
 	public int currentWP = 0;
 	public float nextWaypointDistance = 3;
 
+	protected Player getPlayer() {
+		if (Reference.player != null) {
+			player = Reference.player;
+			return Reference.player;
+		} else
+			return null;
+	}
+
 	protected BaseUnit FindTarget()
 	{
-		//finds all objects with tag Enemy and assigns them to a group
+		if(player != null)
+			if (Vector3.Distance (player.transform.position, transform.position) <= aggroRange)
+				return player;
+
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 
 		//Distance at which a minion will start attacking.
@@ -72,16 +84,9 @@ public abstract class Enemy : BaseUnit
 	public override void Die() {
 		// ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
 		this.gameObject.SetActive (false);
-		DestroyObject (this);
-		DestroyObject (marker);
+		DestroyObject(this);
+		DestroyObject(marker);
 	}
-
-    public override void TakeDamage(int damage)
-    {
-        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
-        if (curHealth == 0)
-           Die();
-    }
 
     public override void SetFacing(BaseUnit target)
     {
