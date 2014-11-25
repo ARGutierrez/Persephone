@@ -23,7 +23,7 @@ public class SummonActions : MonoBehaviour {
         {
             return new Dictionary<string, Action>()
             {   
-                {"Skeleton", () => Reference.player.Summon("Skeleton", 3) },
+                {"Skeleton", () => Reference.player.Summon("Skeleton", Skeleton.WILL_COST) },
                 {"Second", () => {} },
                 {"Third", () => {} },
                 {"Fourth", () => {} },

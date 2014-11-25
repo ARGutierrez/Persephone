@@ -26,7 +26,9 @@ public class Skeleton : Minion
         followDistance = 10f;//gives distance skeleton is from persephone
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
+		DamagePerAttack = DAMAGE_PER_ATTACK;
         seeker = GetComponent<Seeker>();
+		will = WILL_COST;
 
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
 		marker = Instantiate(Resources.Load("MinionMark")) as GameObject;
@@ -100,13 +102,5 @@ public class Skeleton : Minion
 			target.CurHealth -= DAMAGE_PER_ATTACK;
 			lastAttack = Time.time;
 		}
-	}
-	
-	//return used will and add back to the pool
-	public override void Die()
-	{
-		Will.returnWill(WILL_COST);
-		ObjectPool.instance.PoolObject(this.gameObject);
-		DestroyObject (marker);
 	}
 }

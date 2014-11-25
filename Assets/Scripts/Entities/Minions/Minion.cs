@@ -10,6 +10,7 @@ public abstract class Minion : BaseUnit
 	protected float aggroRange;
 	protected BaseUnit target;
 	protected Player player;
+	protected int will;
 
 	protected Seeker seeker;
 	protected Path path;
@@ -77,13 +78,6 @@ public abstract class Minion : BaseUnit
 		currentWP ++;
 	}
 
-    public override void TakeDamage(int damage)
-    {
-        curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
-        if (curHealth == 0)
-            Die();
-    }
-
     public override void SetFacing(BaseUnit target)
     {
         if ((this.transform.position.x - target.transform.position.x) < 0)
@@ -91,4 +85,12 @@ public abstract class Minion : BaseUnit
         else
             this.transform.localScale = new Vector3(-1, 1, 1);
     }
+
+	//return used will and add back to the pool
+	public override void Die()
+	{
+		Will.returnWill(will);
+		ObjectPool.instance.PoolObject(this.gameObject);
+		DestroyObject (marker);
+	}
 }

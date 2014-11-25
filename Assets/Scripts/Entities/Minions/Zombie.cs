@@ -24,7 +24,9 @@ public class Zombie : Minion {
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
 		seeker = GetComponent<Seeker>();
-
+		will = WILL_COST;
+		DamagePerAttack = DAMAGE_PER_ATTACK;
+		
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
 		marker = Instantiate(Resources.Load("MinionMark")) as GameObject;
 		marker.transform.parent = minimap.transform;
@@ -33,6 +35,7 @@ public class Zombie : Minion {
 		if (player == null)
 			getPlayer();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -83,11 +86,5 @@ public class Zombie : Minion {
 			target.CurHealth -= DAMAGE_PER_ATTACK;
 			lastAttack = Time.time;
 		}
-	}
-
-	public override void Die()
-	{
-		Destroy (this.gameObject);
-		DestroyObject (marker);
 	}
 }
