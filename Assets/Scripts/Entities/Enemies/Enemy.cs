@@ -73,6 +73,7 @@ public abstract class Enemy : BaseUnit
 		// ObjectPool.instance.PoolObject(this.gameObject); //We will switch to this once our prefabs are pooled.
 		this.gameObject.SetActive (false);
 		DestroyObject (this);
+		DestroyObject (marker);
 	}
 
     public override void TakeDamage(int damage)

@@ -22,6 +22,12 @@ public class HellHound : Enemy
 		aggroRange = AGGRO_RANGE;
 		attackRange = ATTACK_RANGE;
 		seeker = GetComponent<Seeker>();
+
+		//map marker
+		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
+		marker = Instantiate(Resources.Load("EnemyMark")) as GameObject;
+		marker.transform.parent = minimap.transform;
+		marker.GetComponent<EnemyMark>().enemy = gameObject;
 	}
 	
 	/// <summary>
