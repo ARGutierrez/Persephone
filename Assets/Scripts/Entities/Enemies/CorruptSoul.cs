@@ -12,6 +12,8 @@ public class CorruptSoul : Enemy {
 
 	private BaseUnit temp;
 	private float lastAttack, attackRate = 1;
+
+    Animator anims;
 	
 	// Use this for initialization
 	void Start() {
@@ -22,6 +24,8 @@ public class CorruptSoul : Enemy {
 		attackRange = ATTACK_RANGE;
 		seeker = GetComponent<Seeker>();
 		DamagePerAttack = DAMAGE_PER_ATTACK;
+
+        anims = GetComponent<Animator>();
 
 		//map marker
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
@@ -75,10 +79,18 @@ public class CorruptSoul : Enemy {
 	
 	protected override void Attack(){
 		if(lastAttack + attackRate <= Time.time) {
-			target.TakeDamage(DamagePerAttack);
-			lastAttack = Time.time;
+            anims.SetTrigger("IsAttacking");
 		}
 	}
+
+    /// <summary>
+    /// Corrupt Soul hits multiple times during spin
+    /// </summary>
+    public void Hit()
+    {
+        target.TakeDamage(DamagePerAttack);
+        lastAttack = Time.time;
+    }
 
 
     public override void SetFacing(BaseUnit target)

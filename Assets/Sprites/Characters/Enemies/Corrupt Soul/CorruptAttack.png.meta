@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: a132bfb28dbb7054e8b6f404792112c3
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: CorruptAttack_0
+    21300002: CorruptAttack_1
+    21300004: CorruptAttack_2
+    21300006: CorruptAttack_3
+    21300008: CorruptAttack_4
+    21300010: CorruptAttack_5
+    21300012: CorruptAttack_6
+    21300014: CorruptAttack_7
+    21300016: CorruptAttack_8
+    21300018: CorruptAttack_9
+    21300020: CorruptAttack_10
+    21300022: CorruptAttack_11
+    21300024: CorruptAttack_12
+    21300026: CorruptAttack_13
+    21300028: CorruptAttack_14
+    21300030: CorruptAttack_15
+    21300032: CorruptAttack_16
+    21300034: CorruptAttack_17
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -42,6 +60,186 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: CorruptAttack_0
+      rect:
+        serializedVersion: 2
+        x: 1656
+        y: 87
+        width: 332
+        height: 467
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_1
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 87
+        width: 328
+        height: 476
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_2
+      rect:
+        serializedVersion: 2
+        x: 4023
+        y: 794
+        width: 520
+        height: 472
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_3
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 809
+        width: 688
+        height: 380
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 717
+        width: 640
+        height: 520
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_5
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 756
+        width: 602
+        height: 481
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_6
+      rect:
+        serializedVersion: 2
+        x: 3879
+        y: 1502
+        width: 765
+        height: 530
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_7
+      rect:
+        serializedVersion: 2
+        x: 2637
+        y: 1449
+        width: 814
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_8
+      rect:
+        serializedVersion: 2
+        x: 1453
+        y: 1449
+        width: 761
+        height: 496
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_9
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 1507
+        width: 370
+        height: 511
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_10
+      rect:
+        serializedVersion: 2
+        x: 4115
+        y: 2215
+        width: 365
+        height: 506
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_11
+      rect:
+        serializedVersion: 2
+        x: 2632
+        y: 2205
+        width: 823
+        height: 549
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_12
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 2205
+        width: 717
+        height: 560
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_13
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 2205
+        width: 765
+        height: 530
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_14
+      rect:
+        serializedVersion: 2
+        x: 3864
+        y: 2908
+        width: 823
+        height: 549
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_15
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 2918
+        width: 688
+        height: 380
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_16
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 2903
+        width: 520
+        height: 472
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CorruptAttack_17
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 2899
+        width: 332
+        height: 467
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
