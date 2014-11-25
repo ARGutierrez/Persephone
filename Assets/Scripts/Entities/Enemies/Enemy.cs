@@ -27,9 +27,14 @@ public abstract class Enemy : BaseUnit
 
 	protected BaseUnit FindTarget()
 	{
-		if(player != null)
-			if (Vector3.Distance (player.transform.position, transform.position) <= aggroRange)
+		if(player != null) {
+			if (Vector3.Distance(player.transform.position, transform.position) <= aggroRange) {
 				return player;
+			}
+		}
+		else
+			player = getPlayer();
+
 
 		GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
 

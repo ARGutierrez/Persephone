@@ -2,7 +2,7 @@
 
 public class HealthMonitor : MonoBehaviour {
 
-	public BaseUnit player;
+	public BaseUnit target;
 	public RectTransform healthbar;
 	private float startingSize;
 
@@ -13,8 +13,10 @@ public class HealthMonitor : MonoBehaviour {
 	//When the target is destroyed, update shouldn't be called
 	//Better done using events.
 	void Update() {
-		//Debug.Log (size * ((float)player.curHealth / (float)player.MaxHealth));
-		healthbar.sizeDelta = new Vector2(startingSize * ((float)player.curHealth/(float)player.MaxHealth), healthbar.sizeDelta.y);
+
+		if(target != null) {
+			healthbar.sizeDelta = new Vector2(startingSize * ((float)target.curHealth/(float)target.MaxHealth), healthbar.sizeDelta.y);
+		}
 
 		//if (monitoredObject != null)
 		//{

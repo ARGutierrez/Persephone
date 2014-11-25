@@ -6,13 +6,14 @@ public class Player : BaseUnit
     #region Persephone Base Stats
     private readonly int BASE_HEALTH = 100;
     private readonly float BASE_SPEED = 15f;//TODO design says 4 ft per second....how does that translate?
-	private readonly int BASE_WILL = 15; //assuming skselton is learned at the start? may need to be 10
+	private readonly int BASE_WILL = 6; //assuming skselton is learned at the start? may need to be 10
     private readonly float ATTACK_DELAY = 0.5f;
     private float LAST_ATTACK_TIME = 0f;
     #endregion
 
     public Vector3 HitPoint;
-
+	public GameObject targetBar;
+	private HealthMonitor monitor;
     Animator anims;
     // HACKY CODE AHEAD
     bool canAttack = false;
@@ -28,6 +29,7 @@ public class Player : BaseUnit
 		moveSpeed = BASE_SPEED;
 		CurHealth = MaxHealth = BASE_HEALTH;
 		Will.modifyWill(BASE_WILL);
+		monitor = targetBar.GetComponent<HealthMonitor>();
 
 		//Minimap marker
 		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
@@ -73,7 +75,6 @@ public class Player : BaseUnit
         {
 		    state = EntityState.ATTACKING;
             anims.SetTrigger("IsAttacking");
-            Debug.Log(DamagePerAttack);
             LAST_ATTACK_TIME = Time.time;
         }
     }
