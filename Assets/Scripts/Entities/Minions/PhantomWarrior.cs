@@ -25,6 +25,11 @@ public class PhantomWarrior : Minion {
 		attackRange = ATTACK_RANGE;
 		aggroRange = AGGRO_RANGE;
 		seeker = GetComponent<Seeker>();
+
+		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
+		marker = Instantiate(Resources.Load("MinionMark")) as GameObject;
+		marker.transform.parent = minimap.transform;
+		marker.GetComponent<MinionMark>().minion = gameObject;
 		
 		if (player == null)
 			getPlayer();
@@ -90,5 +95,6 @@ public class PhantomWarrior : Minion {
 	public override void Die()
 	{
 		Destroy (this.gameObject);
+		DestroyObject (marker);
 	}
 }

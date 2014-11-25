@@ -21,6 +21,12 @@ public class CorruptSoul : Enemy {
 		aggroRange = AGGRO_RANGE;
 		attackRange = ATTACK_RANGE;
 		seeker = GetComponent<Seeker>();
+
+		//map marker
+		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
+		marker = Instantiate(Resources.Load("EnemyMark")) as GameObject;
+		marker.transform.parent = minimap.transform;
+		marker.GetComponent<EnemyMark>().enemy = gameObject;
 	}
 	
 	/// <summary>
@@ -31,8 +37,11 @@ public class CorruptSoul : Enemy {
 	void Update () {
 		temp = FindTarget ();
 		if(temp != null)
+		{
 			target = temp;
-        SetFacing(target);
+        	SetFacing(target);
+		}
+
 		if(target != null) { //If we have a target.
 			distFromTarget = Vector3.Distance(target.transform.position, transform.position);
 			

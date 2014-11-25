@@ -29,6 +29,12 @@ public class Player : BaseUnit
 		CurHealth = BASE_HEALTH;
 		MaxHealth = BASE_HEALTH;
 		Will.modifyWill(BASE_WILL);
+
+		//Minimap marker
+		minimap = GameObject.FindGameObjectWithTag("MiniMap").transform;
+		marker = Instantiate(Resources.Load("PlayerMark")) as GameObject;
+		marker.transform.parent = minimap.transform;
+		marker.GetComponent<PlayerMark>().player = gameObject;
 	}
 
 	// Update is called once per frame but we 
@@ -101,6 +107,7 @@ public class Player : BaseUnit
     public override void Die()
     {
 		state = EntityState.DYING;
+		DestroyObject (marker);
     }
 
 	//TODO specifiy which minions are currently learned?

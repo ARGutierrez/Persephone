@@ -23,6 +23,10 @@ public abstract class BaseUnit : MonoBehaviour
 	//protected Weapon myWeapon;
 	protected GameObject myCharacter;
 
+	//MiniMap
+	protected GameObject marker;
+	protected Transform minimap;
+
 //  properties for accessing the variables publicly
 	public int MaxHealth { 
 		get { return maxHealth; } 
