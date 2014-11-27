@@ -24,7 +24,7 @@ public class Player : BaseUnit
 	void Start () {
 		Reference.player = this;
 		input = Reference.input;
-		gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+		// gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         anims = GetComponent<Animator>();
 		moveSpeed = BASE_SPEED;
 		CurHealth = MaxHealth = BASE_HEALTH;

@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: ca417ed23536a2f4cac91a759ea6c062
+guid: 097c5cde16fa5d847a367da4f18f6a5c
 TextureImporter:
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -24,7 +25,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: 1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -42,5 +43,5 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites: []
-  spritePackingTag: Persephone
+  spritePackingTag: 
   userData: 

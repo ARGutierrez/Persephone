@@ -18,6 +18,11 @@ public class MyInput : MonoBehaviour {
 			Reference.player.Summon("Skeleton", Skeleton.WILL_COST);
 		}
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.LoadLevel(0);
+        }
+
 		/*if(Input.GetButtonDown("Summon2")) {
 			Reference.player.Summon("Skeleton", 3);
 		}

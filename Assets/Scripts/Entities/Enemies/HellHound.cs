@@ -84,8 +84,8 @@ public class HellHound : Enemy
     public override void SetFacing(BaseUnit target)
     {
         if ((this.transform.position.x - target.transform.position.x) < 0)
-            this.transform.localScale = new Vector3(6, 6, 1);
+            this.transform.localScale = new Vector3(2, 2, 1);
         else
-            this.transform.localScale = new Vector3(-6, 6, 1);
+            this.transform.localScale = new Vector3(-2, 2, 1);
     }
 }

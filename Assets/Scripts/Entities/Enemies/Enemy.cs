@@ -28,7 +28,7 @@ public abstract class Enemy : BaseUnit
 	protected BaseUnit FindTarget()
 	{
 		if(player != null) {
-			if (Vector3.Distance(player.transform.position, transform.position) <= aggroRange/2) {
+			if (Vector3.Distance(player.transform.position, transform.position) <= aggroRange) {
 				return player;
 			}
 		}

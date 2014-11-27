@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Tomb : BasicPuzzleTrigger {
 
+    public Sprite[] sprites;
+    public AudioSource switchSound;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -32,6 +35,8 @@ public class Tomb : BasicPuzzleTrigger {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+            GetComponent<SpriteRenderer>().sprite = sprites[1];
+            switchSound.Play();
         }
     }
 }

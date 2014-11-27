@@ -57,7 +57,7 @@ public abstract class BaseUnit : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-		curHealth = Mathf.Clamp(curHealth - damage, 0, MaxHealth);
+		CurHealth = Mathf.Clamp(CurHealth - damage, 0, MaxHealth);
 		if (curHealth == 0)
 			Die();
 	}

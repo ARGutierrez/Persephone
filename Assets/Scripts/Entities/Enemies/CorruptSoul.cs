@@ -88,7 +88,7 @@ public class CorruptSoul : Enemy {
     /// </summary>
     public void Hit()
     {
-        target.TakeDamage(DamagePerAttack);
+        target.TakeDamage(DamagePerAttack / 4);
         lastAttack = Time.time;
     }
 
@@ -96,8 +96,8 @@ public class CorruptSoul : Enemy {
     public override void SetFacing(BaseUnit target)
     {
         if ((this.transform.position.x - target.transform.position.x) < 0)
-            this.transform.localScale = new Vector3(2, 2, 1);
+            this.transform.localScale = new Vector3(1f, 1f, 1);
         else
-            this.transform.localScale = new Vector3(-2, 2, 1);
+            this.transform.localScale = new Vector3(-1f, 1f, 1);
     }
 }
